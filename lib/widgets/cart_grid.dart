@@ -14,40 +14,43 @@ class CartGrid extends StatelessWidget {
     final cart = Provider.of<Cart>(context);
     return Column(
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.15,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.zero),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.05,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.15,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.zero),
+                    ),
                   ),
+                  icon: Icon(Icons.food_bank),
+                  onPressed: () {},
+                  label: Text('Current Order'),
                 ),
-                icon: Icon(Icons.add),
-                onPressed: () {},
-                label: Text('Add Customer'),
               ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.10,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.zero),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.10,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.zero),
+                    ),
                   ),
+                  icon: Icon(
+                    Icons.delete,
+                    size: 30,
+                  ),
+                  onPressed: cart.clear,
+                  label: Text(''),
                 ),
-                icon: Icon(
-                  Icons.delete,
-                  size: 30,
-                ),
-                onPressed: cart.clear,
-                label: Text(''),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         SizedBox(height: 10),
         Expanded(
@@ -64,9 +67,8 @@ class CartGrid extends StatelessWidget {
           ),
         ),
         Card(
-          margin: EdgeInsets.all(15),
           child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -74,7 +76,6 @@ class CartGrid extends StatelessWidget {
                   'Total',
                   style: TextStyle(fontSize: 20),
                 ),
-                Spacer(),
                 Chip(
                   label: Text(
                     '\$${cart.totalAmount.toStringAsFixed(2)}',

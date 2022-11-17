@@ -10,7 +10,7 @@ class CategoryItem extends StatelessWidget {
     var categoryData = Provider.of<Categories>(context, listen: false);
     var productData = Provider.of<Products>(context);
     return Card(
-      elevation: 3,
+      elevation: 4,
       color: Color.fromARGB(255, 120, 194, 247),
       child: InkWell(
         splashColor: Colors.blue.shade100,

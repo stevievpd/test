@@ -11,11 +11,22 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orderData = Provider.of<Orders>(context);
-    return Container(
-      child: ListView.builder(
-        itemCount: orderData.orders.length,
-        itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-      ),
+    return Row(
+      children: [
+        Container(
+          height: double.infinity,
+          width: MediaQuery.of(context).size.width * 0.4,
+          child: ListView.builder(
+            itemCount: orderData.orders.length,
+            itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
+          ),
+        ),
+        Container(
+          color: Colors.red,
+          height: double.infinity,
+          width: MediaQuery.of(context).size.width * 0.6,
+        ),
+      ],
     );
   }
 }

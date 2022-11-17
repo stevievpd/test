@@ -29,13 +29,29 @@ class ProductItem extends StatelessWidget {
           },
           child: Consumer<Product>(
             builder: (ctx, product, _) => Card(
+              elevation: 10,
+              color: Colors.blue[300],
               child: InkWell(
                 onTap: () {
                   cart.addItem(product.id, product.price, product.title);
                   ScrollControl().scrollDown();
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: Duration(seconds: 2),
+                      content: Text("Added to cart!"),
+                      action: SnackBarAction(
+                        label: 'UNDO',
+                        onPressed: () {
+                          cart.removeSingleItem(product.id);
+                        },
+                      ),
+                    ),
+                  );
                 },
-                splashColor: Colors.blue,
+                splashColor: Colors.blue[100],
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(product.title),
                     Text(product.price.toString()),
