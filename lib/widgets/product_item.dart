@@ -50,12 +50,20 @@ class ProductItem extends StatelessWidget {
                   );
                 },
                 splashColor: Colors.blue[100],
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(product.title),
-                    Text(product.price.toString()),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        product.title,
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(product.price.toString()),
+                    ],
+                  ),
                 ),
               ),
             ),
