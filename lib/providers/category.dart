@@ -8,8 +8,8 @@ class Categories with ChangeNotifier {
   String? title;
 
   Categories({
-    required this.id,
-    required this.title,
+    this.id,
+    this.title,
   });
 
   Categories.fromJson(Map<String, dynamic> json) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/product_detail_screen.dart';
 import '../providers/product.dart';
 import '../providers/cart.dart';
 import '../providers/scroll_controller.dart';
@@ -20,7 +21,12 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              ProductDetailScreen.routeName,
+              arguments: product.id,
+            );
+          },
           child: Consumer<Product>(
             builder: (ctx, product, _) => Card(
               elevation: 10,
@@ -32,7 +38,7 @@ class ProductItem extends StatelessWidget {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      duration: Duration(milliseconds: 2),
+                      duration: Duration(seconds: 2),
                       content: Text("Added to cart!"),
                       action: SnackBarAction(
                         label: 'UNDO',

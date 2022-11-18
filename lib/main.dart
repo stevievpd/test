@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/user_product_screen.dart';
 import 'widgets/cart_grid.dart';
 import './screens/products_overview_screen.dart';
+import './screens/product_detail_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
+import './screens/orders_screen.dart';
 import 'providers/category.dart';
 
 Future<void> main() async {
@@ -42,8 +43,9 @@ class MyApp extends StatelessWidget {
           ),
           home: ProductsOverviewScreen(),
           routes: {
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
             CartGrid.routeName: (ctx) => CartGrid(),
-            UserProductScreen.routeName: (ctx) => UserProductScreen(),
+            OrdersScreen.routeName: (ctx) => OrdersScreen(),
           }),
     );
   }
