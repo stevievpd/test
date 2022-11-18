@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class Categories with ChangeNotifier {
-  int id;
-  String title;
+  int? id;
+  String? title;
 
   Categories({
     this.id,

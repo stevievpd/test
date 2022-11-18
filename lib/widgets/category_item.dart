@@ -15,7 +15,7 @@ class CategoryItem extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.blue.shade100,
         onTap: () {
-          productData.productItemsByCate(categoryData.id.toInt());
+          productData.productItemsByCate(categoryData.id!.toInt());
         },
         child: Padding(
           padding: EdgeInsets.all(13),
