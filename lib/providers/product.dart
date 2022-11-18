@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 
 class Product with ChangeNotifier {
-  final String id;
-  final String title;
-  final String description;
-  final double price;
-  final int category;
-  bool isFavorite;
+  late String id;
+  late String title;
+  late String description;
+  late double price;
+  late int category;
 
   Product({
     required this.id,
@@ -14,11 +13,23 @@ class Product with ChangeNotifier {
     required this.description,
     required this.price,
     required this.category,
-    this.isFavorite = false,
   });
 
-  void toggleFavoriteStatus() {
-    isFavorite = !isFavorite;
-    notifyListeners();
+  Product.fromJson(Map<String, dynamic> json) {
+    id = json['id'].toString();
+    title = json['title'] as String;
+    description = json['description'] as String;
+    price = (json['price'] as num).toDouble();
+    category = json['category'] as int;
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['price'] = price;
+    data['category'] = category;
+    return data;
   }
 }
