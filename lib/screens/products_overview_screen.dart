@@ -76,13 +76,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Row(
       children: [
         Column(
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.75,
-              height: MediaQuery.of(context).size.height * 0.40,
+              width: screenSize.width * 0.75,
+              height: screenSize.height * 0.40,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   border: Border.all(width: 0.05),
@@ -94,15 +95,15 @@ class MenuScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.75,
-              height: MediaQuery.of(context).size.height * 0.4190,
+              width: screenSize.width * 0.75,
+              height: screenSize.height * 0.4,
               child: ProductsGrid(),
             ),
           ],
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.25,
-          height: MediaQuery.of(context).size.height,
+          width: screenSize.width * 0.25,
+          height: screenSize.height,
           child: DecoratedBox(
             decoration: BoxDecoration(
               border: Border.all(width: 0.05),
