@@ -5,8 +5,8 @@ class Categories with ChangeNotifier {
   String title;
 
   Categories({
-    this.id,
-    this.title,
+    required this.id,
+    required this.title,
   });
 }
 

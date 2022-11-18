@@ -5,17 +5,15 @@ class Product with ChangeNotifier {
   final String title;
   final String description;
   final double price;
-  final String imageUrl;
   final int category;
   bool isFavorite;
 
   Product({
-    @required this.id,
-    @required this.title,
-    @required this.description,
-    @required this.price,
-    @required this.imageUrl,
-    @required this.category,
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.category,
     this.isFavorite = false,
   });
 
