@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,15 +75,15 @@ class CartItem extends StatelessWidget {
             padding: EdgeInsets.all(1),
             child: ListTile(
               leading: CircleAvatar(
+                maxRadius: 15,
                 child: Padding(
-                  padding: EdgeInsets.all(5),
+                  padding: EdgeInsets.all(2),
                   child: FittedBox(
-                    child: Text('\P $price'),
+                    child: Text(productId),
                   ),
                 ),
               ),
               title: Text(title),
-              subtitle: Text('Total: \P ${(price * quantity)}'),
               trailing: Text('$quantity x'),
             ),
           ),

@@ -5,9 +5,15 @@ import '../providers/product.dart';
 import '../providers/cart.dart';
 import '../providers/scroll_controller.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
+  @override
+  State<ProductItem> createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
+    bool isEmpty = false;
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
     return ClipRRect(
@@ -26,7 +32,7 @@ class ProductItem extends StatelessWidget {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      duration: Duration(seconds: 2),
+                      duration: Duration(milliseconds: 5),
                       content: Text("Added to cart!"),
                       action: SnackBarAction(
                         label: 'UNDO',
@@ -49,7 +55,10 @@ class ProductItem extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
-                      Text(product.price.toString()),
+                      Text(
+                        'P${product.price}'.toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),

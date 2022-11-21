@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'category.dart';
 
 import './product.dart';
 
@@ -24,8 +25,7 @@ class Products with ChangeNotifier {
 
   List<Product> productItemsByCate(int categoryId) {
     productList = _items;
-    productList =
-        productList.where((element) => element.category == categoryId).toList();
+    productList.where((element) => element.category == categoryId);
     notifyListeners();
     return productList;
   }
@@ -41,8 +41,6 @@ class Products with ChangeNotifier {
           rest.map<Product>((json) => Product.fromJson(json)).toList();
       _items = loadedMeals;
       notifyListeners();
-    } catch (e) {
-      print("Error");
-    }
+    } catch (e) {}
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import './cart.dart';
 
+double? discountAmount = 0.0;
+
 class OrderItem {
   final String id;
   final double amount;
@@ -23,7 +25,7 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
-  void addOrder(List<CartItem> cartProducts, double total) {
+  Future<void> addOrder(List<CartItem> cartProducts, double total) async {
     _orders.insert(
       0,
       OrderItem(

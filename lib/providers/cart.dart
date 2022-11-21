@@ -33,6 +33,16 @@ class Cart with ChangeNotifier {
     return total;
   }
 
+  double get totalTax {
+    double tax = totalAmount * 0.12;
+    return tax;
+  }
+
+  double get subTotal {
+    double subTotal = totalAmount - totalTax;
+    return subTotal;
+  }
+
   void addItem(
     String productId,
     double price,

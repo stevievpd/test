@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/more_screen.dart';
 import 'package:flutter_complete_guide/screens/orders_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -22,16 +23,10 @@ class ProductsOverviewScreen extends StatefulWidget {
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   int _selectedIndex = 0;
 
-  List<Widget> _widgetOptions = <Widget>[
-    Container(
-      child: MenuScreen(),
-    ),
-    Container(
-      child: OrdersScreen(),
-    ),
-    Text(
-      'Index 2: School',
-    ),
+  final List<Widget> _widgetOptions = <Widget>[
+    MenuScreen(),
+    OrdersScreen(),
+    MoreScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -44,7 +39,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MyShop'),
+        title: const Text('My Shop'),
       ),
       drawer: AppDrawer(),
       body: SafeArea(
@@ -89,7 +84,7 @@ class MenuScreen extends StatelessWidget {
                   border: Border.all(width: 0.05),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: CategoryGrid(),
                 ),
               ),
@@ -110,7 +105,7 @@ class MenuScreen extends StatelessWidget {
             ),
             child: CartGrid(),
           ),
-        )
+        ),
       ],
     );
   }
