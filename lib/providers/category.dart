@@ -6,6 +6,7 @@ import 'dart:convert';
 class Categories with ChangeNotifier {
   int? id;
   String? title;
+  String? icon;
 
   Categories({
     this.id,
@@ -15,12 +16,14 @@ class Categories with ChangeNotifier {
   Categories.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     title = json['title'].toString();
+    icon = json['icon'].toString();
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['title'] = title;
+    data['icon'] = icon;
     return data;
   }
 }

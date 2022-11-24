@@ -42,10 +42,13 @@ class MoreScreen extends StatelessWidget {
                   padding: EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
-                      'Orders',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    label: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Orders',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
                     ),
                     icon: Icon(Icons.shopping_basket),
                   ),

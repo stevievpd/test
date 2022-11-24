@@ -78,21 +78,24 @@ class MenuScreen extends StatelessWidget {
           children: [
             SizedBox(
               width: screenSize.width * 0.75,
-              height: screenSize.height * 0.40,
+              height: screenSize.height * 0.18,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   border: Border.all(width: 0.05),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(30),
                   child: CategoryGrid(),
                 ),
               ),
             ),
             SizedBox(
               width: screenSize.width * 0.75,
-              height: screenSize.height * 0.4,
-              child: ProductsGrid(),
+              height: screenSize.height * 0.6,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 25.0, right: 25, top: 10),
+                child: ProductsGrid(),
+              ),
             ),
           ],
         ),

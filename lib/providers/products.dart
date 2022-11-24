@@ -25,13 +25,14 @@ class Products with ChangeNotifier {
 
   List<Product> productItemsByCate(int categoryId) {
     productList = _items;
-    productList.where((element) => element.category == categoryId);
+    productList =
+        productList.where((element) => element.category == categoryId).toList();
     notifyListeners();
     return productList;
   }
 
   Future<void> fetchProducts() async {
-    var url = Uri.parse("http://${dotenv.env['apiUrl']}/meals/get-all-meals");
+    var url = Uri.parse("http://${dotenv.env['apiUrl']}/meals/get-all-product");
     try {
       final response = await http.get(url);
       var data = json.decode(response.body);

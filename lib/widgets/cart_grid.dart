@@ -55,7 +55,7 @@ class CartGrid extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: MediaQuery.of(context).size.height * 0.45,
           child: ListView.builder(
             controller: controller,
             itemCount: cart.items.length,
@@ -68,123 +68,101 @@ class CartGrid extends StatelessWidget {
             ),
           ),
         ),
-        Divider(),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.34,
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15, right: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const Text(
-                        'Subtotal',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Text(
-                        '\P ${cart.subTotal.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15, right: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const Text(
-                        'Tax (12%)',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Text(
-                        '\P ${cart.totalTax.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15, right: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const Text(
-                        'Total',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        '\P ${cart.totalAmount.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 18),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Payment Method',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.money),
-                            label: Text('Cash'),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            elevation: 4,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.28,
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Text(
+                            'Subtotal',
+                            style: TextStyle(fontSize: 15),
                           ),
-                          TextButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.card_giftcard),
-                            label: Text('Debit'),
-                          ),
-                          TextButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.qr_code),
-                            label: Text('E-wallet'),
+                          Text(
+                            '\P ${cart.subTotal.toStringAsFixed(2)}',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Text(
+                            'Tax (12%)',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          Text(
+                            '\P ${cart.totalTax.toStringAsFixed(2)}',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                     ),
-                    child: Text(
-                      'Place Order',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                        '---------------------------------------------------------'),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 10, bottom: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Text(
+                            'Total',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Text(
+                            '\P ${cart.totalAmount.toStringAsFixed(2)}',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
-                    onPressed: () {
-                      Provider.of<Orders>(context, listen: false).addOrder(
-                        cart.items.values.toList(),
-                        cart.totalAmount,
-                      );
-                      cart.clear();
-                    },
-                  ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.060,
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                            ),
+                          ),
+                        ),
+                        icon: Icon(Icons.print),
+                        label: Text(
+                          'Place Order',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          Provider.of<Orders>(context, listen: false).addOrder(
+                            cart.items.values.toList(),
+                            cart.totalAmount,
+                          );
+                          cart.clear();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
