@@ -25,7 +25,8 @@ class Products with ChangeNotifier {
 
   List<Product> productItemsByCate(int categoryId) {
     productList = _items;
-    productList.where((element) => element.category == categoryId);
+    productList =
+        productList.where((element) => element.category == categoryId).toList();
     notifyListeners();
     return productList;
   }
