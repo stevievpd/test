@@ -24,12 +24,11 @@ class _ProductsGridState extends State<ProductsGrid> {
   @override
   Widget build(BuildContext context) {
     final productList = Provider.of<Products>(context);
-    final products = productList.items;
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: productList.productList.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-        value: products[i],
+        value: productList.productList[i],
         child: ProductItem(),
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
