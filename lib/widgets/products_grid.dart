@@ -32,7 +32,7 @@ class _ProductsGridState extends State<ProductsGrid> {
         child: ProductItem(),
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
+        crossAxisCount: 3,
         childAspectRatio: 2,
       ),
     );

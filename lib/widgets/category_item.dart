@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/category.dart';
 import '../providers/products.dart';
+import 'package:http/http.dart';
 
 class CategoryItem extends StatelessWidget {
   @override
@@ -12,8 +13,11 @@ class CategoryItem extends StatelessWidget {
     var categoryData = Provider.of<Categories>(context, listen: false);
     var productData = Provider.of<Products>(context);
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
       elevation: 4,
-      color: Color.fromARGB(255, 120, 194, 247),
+      color: Color.fromARGB(255, 58, 59, 74),
       child: InkWell(
         splashColor: Colors.blue.shade100,
         onTap: () {
@@ -21,9 +25,15 @@ class CategoryItem extends StatelessWidget {
         },
         child: Padding(
           padding: EdgeInsets.all(13),
-          child: Text(
-            categoryData.title.toString(),
-            style: Theme.of(context).textTheme.titleLarge,
+          child: Row(
+            children: [
+              SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: Image.network(categoryData.icon.toString())),
+              Text(categoryData.title.toString(),
+                  style: TextStyle(fontSize: 18, color: Colors.white)),
+            ],
           ),
         ),
       ),

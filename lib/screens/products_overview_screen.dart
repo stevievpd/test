@@ -40,12 +40,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Shop'),
+        backgroundColor: const Color(0xff1f2029),
       ),
       drawer: AppDrawer(),
       body: SafeArea(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color(0xff1f2029),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_checkout),
@@ -61,7 +63,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.deepOrange,
+        unselectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
     );
@@ -80,9 +83,7 @@ class MenuScreen extends StatelessWidget {
               width: screenSize.width * 0.75,
               height: screenSize.height * 0.18,
               child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.05),
-                ),
+                decoration: BoxDecoration(color: const Color(0xff1f2029)),
                 child: Padding(
                   padding: const EdgeInsets.all(30),
                   child: CategoryGrid(),
@@ -91,10 +92,14 @@ class MenuScreen extends StatelessWidget {
             ),
             SizedBox(
               width: screenSize.width * 0.75,
-              height: screenSize.height * 0.6,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 25.0, right: 25, top: 10),
-                child: ProductsGrid(),
+              height: screenSize.height * 0.639,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: const Color(0xff1f2029)),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 25.0, right: 25, top: 10),
+                  child: ProductsGrid(),
+                ),
               ),
             ),
           ],
@@ -103,9 +108,7 @@ class MenuScreen extends StatelessWidget {
           width: screenSize.width * 0.25,
           height: screenSize.height,
           child: DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(width: 0.05),
-            ),
+            decoration: BoxDecoration(color: const Color(0xff1f2029)),
             child: CartGrid(),
           ),
         ),

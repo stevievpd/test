@@ -1,5 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -67,6 +69,11 @@ class CartItem extends StatelessWidget {
           Provider.of<Cart>(context, listen: false).removeItem(productId);
         },
         child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          elevation: 4,
+          color: Color.fromARGB(255, 58, 59, 74),
           margin: EdgeInsets.symmetric(
             horizontal: 15,
             vertical: 4,
@@ -79,12 +86,18 @@ class CartItem extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(2),
                   child: FittedBox(
-                    child: Text(productId),
+                    child: Text(
+                      productId,
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ),
-              title: Text(title),
-              trailing: Text('$quantity x'),
+              title: Text(title, style: TextStyle(color: Colors.white)),
+              subtitle:
+                  Text('Total: P$price', style: TextStyle(color: Colors.white)),
+              trailing:
+                  Text('($quantity x)', style: TextStyle(color: Colors.white)),
             ),
           ),
         ),

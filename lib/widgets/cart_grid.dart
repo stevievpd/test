@@ -22,9 +22,10 @@ class CartGrid extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.15,
+                width: MediaQuery.of(context).size.width * 0.12,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 58, 59, 74),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.zero),
                     ),
@@ -38,7 +39,7 @@ class CartGrid extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.10,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.deepOrange,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.zero),
                     ),
@@ -48,7 +49,7 @@ class CartGrid extends StatelessWidget {
                     size: 30,
                   ),
                   onPressed: cart.clear,
-                  label: Text(''),
+                  label: Text('CLEAR'),
                 ),
               ),
             ],
@@ -56,22 +57,29 @@ class CartGrid extends StatelessWidget {
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.45,
-          child: ListView.builder(
-            controller: controller,
-            itemCount: cart.items.length,
-            itemBuilder: (ctx, i) => CartItem(
-              cart.items.values.toList()[i].id,
-              cart.items.keys.toList()[i],
-              cart.items.values.toList()[i].price,
-              cart.items.values.toList()[i].quantity,
-              cart.items.values.toList()[i].title,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: ListView.builder(
+              controller: controller,
+              itemCount: cart.items.length,
+              itemBuilder: (ctx, i) => CartItem(
+                cart.items.values.toList()[i].id,
+                cart.items.keys.toList()[i],
+                cart.items.values.toList()[i].price,
+                cart.items.values.toList()[i].quantity,
+                cart.items.values.toList()[i].title,
+              ),
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
             elevation: 4,
+            color: Color.fromARGB(255, 58, 59, 74),
             child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.28,
               child: Padding(
@@ -80,18 +88,20 @@ class CartGrid extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 15, right: 10, bottom: 10),
+                          left: 15, right: 10, bottom: 10, top: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           const Text(
                             'Subtotal',
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                           Text(
                             '\P ${cart.subTotal.toStringAsFixed(2)}',
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ],
                       ),
@@ -104,18 +114,22 @@ class CartGrid extends StatelessWidget {
                         children: <Widget>[
                           const Text(
                             'Tax (12%)',
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                           Text(
                             '\P ${cart.totalTax.toStringAsFixed(2)}',
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ],
                       ),
                     ),
                     Text(
-                        '---------------------------------------------------------'),
+                      '-----------------------------------------------------',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 15, right: 10, bottom: 30),
@@ -124,21 +138,25 @@ class CartGrid extends StatelessWidget {
                         children: <Widget>[
                           const Text(
                             'Total',
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                           Text(
                             '\P ${cart.totalAmount.toStringAsFixed(2)}',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.060,
+                      height: MediaQuery.of(context).size.height * 0.07,
                       width: double.infinity,
                       child: ElevatedButton.icon(
                         style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.deepOrange),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -149,7 +167,8 @@ class CartGrid extends StatelessWidget {
                         icon: Icon(Icons.print),
                         label: Text(
                           'Place Order',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                         onPressed: () {
                           Provider.of<Orders>(context, listen: false).addOrder(

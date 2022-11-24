@@ -24,8 +24,11 @@ class _ProductItemState extends State<ProductItem> {
           onTap: () {},
           child: Consumer<Product>(
             builder: (ctx, product, _) => Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
               elevation: 10,
-              color: Colors.blue[300],
+              color: Color.fromARGB(255, 58, 59, 74),
               child: InkWell(
                 onTap: () {
                   cart.addItem(product.id, product.price, product.title);
@@ -45,22 +48,32 @@ class _ProductItemState extends State<ProductItem> {
                   );
                 },
                 splashColor: Colors.blue[100],
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        product.title,
-                        style: TextStyle(
-                          fontSize: 18,
+                child: ClipRRect(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              product.title,
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            Text(
+                              'P${product.price}'.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepOrange,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text(
-                        'P${product.price}'.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
