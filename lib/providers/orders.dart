@@ -1,4 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import './cart.dart';
 
@@ -26,6 +29,10 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
+    var url = Uri.parse("http://${dotenv.env['apiUrl']}/order/insert-order");
+    try {
+      final response = await http.post(url);
+    } catch (e) {}
     _orders.insert(
       0,
       OrderItem(
