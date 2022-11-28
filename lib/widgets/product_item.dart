@@ -28,7 +28,7 @@ class _ProductItemState extends State<ProductItem> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               elevation: 10,
-              color: Color.fromARGB(255, 58, 59, 74),
+              color: Color.fromARGB(255, 47, 48, 60),
               child: InkWell(
                 onTap: () {
                   cart.addItem(product.id, product.price, product.title);
@@ -51,26 +51,31 @@ class _ProductItemState extends State<ProductItem> {
                 child: ClipRRect(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              product.title,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                            Text(
-                              'P${product.price}'.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.deepOrange,
-                                fontSize: 18,
+                        Container(
+                            height: 120,
+                            width: 180,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                product.icon.toString(),
+                                fit: BoxFit.cover,
                               ),
-                            ),
-                          ],
+                            )),
+                        Text(
+                          product.title,
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        Text(
+                          'P ${product.price}'.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrange,
+                            fontSize: 20,
+                          ),
                         ),
                       ],
                     ),

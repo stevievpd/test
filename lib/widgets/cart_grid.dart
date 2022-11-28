@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,14 +27,17 @@ class CartGrid extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.12,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 58, 59, 74),
+                    backgroundColor: Color.fromARGB(255, 47, 48, 60),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.zero),
                     ),
                   ),
-                  icon: Icon(Icons.food_bank),
+                  icon: Icon(Icons.shopping_basket_outlined),
                   onPressed: () {},
-                  label: Text('Current Order'),
+                  label: Text(
+                    'Order',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
               SizedBox(
@@ -79,7 +84,7 @@ class CartGrid extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
             elevation: 4,
-            color: Color.fromARGB(255, 58, 59, 74),
+            color: Color.fromARGB(255, 47, 48, 60),
             child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.28,
               child: Padding(
@@ -126,9 +131,10 @@ class CartGrid extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(
-                      '-----------------------------------------------------',
-                      style: TextStyle(color: Colors.white),
+                    Divider(
+                      indent: 15,
+                      endIndent: 10,
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(

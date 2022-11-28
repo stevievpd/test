@@ -73,7 +73,7 @@ class CartItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
           elevation: 4,
-          color: Color.fromARGB(255, 58, 59, 74),
+          color: Color.fromARGB(255, 47, 48, 60),
           margin: EdgeInsets.symmetric(
             horizontal: 15,
             vertical: 4,
@@ -93,11 +93,23 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
               ),
-              title: Text(title, style: TextStyle(color: Colors.white)),
+              title: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               subtitle:
-                  Text('Total: P$price', style: TextStyle(color: Colors.white)),
-              trailing:
-                  Text('($quantity x)', style: TextStyle(color: Colors.white)),
+                  Text('Total: P$price', style: TextStyle(color: Colors.grey)),
+              trailing: Text(
+                '$quantity x',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ),

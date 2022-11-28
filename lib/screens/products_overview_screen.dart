@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/inventory_screen.dart';
 import 'package:flutter_complete_guide/screens/more_screen.dart';
 import 'package:flutter_complete_guide/screens/orders_screen.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     MenuScreen(),
     OrdersScreen(),
+    InventoryScreen(),
     MoreScreen(),
   ];
 
@@ -47,6 +49,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xff1f2029),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -56,6 +59,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt_long),
             label: 'Transactions',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.inventory_2),
+            label: 'Inventory',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.more),

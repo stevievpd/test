@@ -13,7 +13,7 @@ class OrdersScreen extends StatelessWidget {
     final orderData = Provider.of<Orders>(context);
     return Row(
       children: [
-        Container(
+        SizedBox(
           height: double.infinity,
           width: MediaQuery.of(context).size.width * 0.4,
           child: ListView.builder(

@@ -1,4 +1,4 @@
-// ignore_for_file: sdk_version_ui_as_code
+// ignore_for_file: sdk_version_ui_as_code, prefer_const_constructors
 
 import 'dart:math';
 

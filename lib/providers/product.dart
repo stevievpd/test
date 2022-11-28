@@ -6,6 +6,7 @@ class Product with ChangeNotifier {
   late String description;
   late double price;
   late int category;
+  late String icon;
 
   Product({
     required this.id,
@@ -13,6 +14,7 @@ class Product with ChangeNotifier {
     required this.description,
     required this.price,
     required this.category,
+    required this.icon,
   });
 
   Product.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class Product with ChangeNotifier {
     description = json['description'] as String;
     price = (json['price'] as num).toDouble();
     category = json['category'] as int;
+    icon = json['icon'] as String;
   }
 
   Map<String, dynamic> toJson() {
@@ -30,6 +33,7 @@ class Product with ChangeNotifier {
     data['description'] = description;
     data['price'] = price;
     data['category'] = category;
+    data['icon'] = icon;
     return data;
   }
 }
