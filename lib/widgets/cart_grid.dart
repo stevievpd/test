@@ -63,18 +63,27 @@ class CartGrid extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.45,
           child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: ListView.builder(
-              controller: controller,
-              itemCount: cart.items.length,
-              itemBuilder: (ctx, i) => CartItem(
-                cart.items.values.toList()[i].id,
-                cart.items.keys.toList()[i],
-                cart.items.values.toList()[i].price,
-                cart.items.values.toList()[i].quantity,
-                cart.items.values.toList()[i].title,
-              ),
-            ),
+            padding: const EdgeInsets.only(top: 8.0, left: 18, right: 20),
+            child: cart.items.length < 1
+                ? Container(
+                    color: Color.fromARGB(255, 47, 48, 60),
+                    child: Center(
+                        child: Image.asset(
+                      'assets/images/cart_logo.png',
+                      fit: BoxFit.cover,
+                    )),
+                  )
+                : ListView.builder(
+                    controller: controller,
+                    itemCount: cart.items.length,
+                    itemBuilder: (ctx, i) => CartItem(
+                      cart.items.values.toList()[i].id,
+                      cart.items.keys.toList()[i],
+                      cart.items.values.toList()[i].price,
+                      cart.items.values.toList()[i].quantity,
+                      cart.items.values.toList()[i].title,
+                    ),
+                  ),
           ),
         ),
         Padding(
@@ -176,13 +185,16 @@ class CartGrid extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
-                        onPressed: () {
-                          Provider.of<Orders>(context, listen: false).addOrder(
-                            cart.items.values.toList(),
-                            cart.totalAmount,
-                          );
-                          cart.clear();
-                        },
+                        onPressed: cart.totalAmount <= 0
+                            ? null
+                            : () {
+                                Provider.of<Orders>(context, listen: false)
+                                    .addOrder(
+                                  cart.items.values.toList(),
+                                  cart.totalAmount,
+                                );
+                                cart.clear();
+                              },
                       ),
                     ),
                   ],

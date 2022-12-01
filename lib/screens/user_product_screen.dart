@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,33 +13,32 @@ class UserProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Products'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              // ...
-            },
-          ),
-        ],
-      ),
-      drawer: AppDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: ListView.builder(
-          itemCount: productsData.items.length,
-          itemBuilder: (_, i) => Column(
-            children: [
-              UserProductItem(
-                productsData.items[i].title,
+    return Row(
+      children: [
+        Container(
+          color: Colors.blue,
+          width: MediaQuery.of(context).size.width * 0.4,
+        ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.58,
+              child: ListView.builder(
+                itemCount: productsData.items.length,
+                itemBuilder: (_, i) => Column(
+                  children: [
+                    UserProductItem(
+                      productsData.items[i].title,
+                    ),
+                    Divider(),
+                  ],
+                ),
               ),
-              Divider(),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

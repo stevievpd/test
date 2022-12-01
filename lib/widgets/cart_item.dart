@@ -35,7 +35,7 @@ class CartItem extends StatelessWidget {
             size: 40,
           ),
           alignment: Alignment.centerRight,
-          padding: EdgeInsets.only(right: 20),
+          padding: EdgeInsets.only(right: 10),
           margin: EdgeInsets.symmetric(
             horizontal: 15,
             vertical: 4,
@@ -75,7 +75,7 @@ class CartItem extends StatelessWidget {
           elevation: 4,
           color: Color.fromARGB(255, 47, 48, 60),
           margin: EdgeInsets.symmetric(
-            horizontal: 15,
+            horizontal: 1,
             vertical: 4,
           ),
           child: Padding(

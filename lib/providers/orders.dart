@@ -49,4 +49,34 @@ class Orders with ChangeNotifier {
     _orders = [];
     notifyListeners();
   }
+
+  Future<void> addOrders(List<CartItem> cartProducts, double total) async {
+    final url = Uri.https("http://${dotenv.env['apiUrl']}/order/insert-order");
+    final timestamp = DateTime.now();
+    final response = await http.post(
+      url,
+      body: json.encode({
+        'amount': total,
+        'dateTime': timestamp.toIso8601String(),
+        'products': cartProducts
+            .map((cp) => {
+                  'id': cp.id,
+                  'title': cp.title,
+                  'quantity': cp.quantity,
+                  'price': cp.price,
+                })
+            .toList(),
+      }),
+    );
+    _orders.insert(
+      0,
+      OrderItem(
+        id: json.decode(response.body)['name'],
+        amount: total,
+        dateTime: timestamp,
+        products: cartProducts,
+      ),
+    );
+    notifyListeners();
+  }
 }

@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/material.dart';
 import 'package:data_table_2/data_table_2.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+
+import '../providers/product.dart';
 
 class InventoryScreen extends StatefulWidget {
   @override
@@ -18,6 +20,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
   void initState() {
     _chartData = getchartData();
     _tooltipBehavior = TooltipBehavior(enable: true);
+
     super.initState();
   }
 
@@ -79,25 +82,39 @@ class _InventoryScreenState extends State<InventoryScreen> {
             height: double.infinity,
             width: MediaQuery.of(context).size.width * 0.59,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: DataTable2(
-                  columnSpacing: 2,
-                  horizontalMargin: 2,
-                  minWidth: 300,
-                  columns: [
-                    DataColumn2(label: Text('Product name')),
-                    DataColumn(label: Text('Description')),
-                    DataColumn(label: Text('Quantity')),
-                    DataColumn(label: Text('Price')),
-                  ],
-                  rows: List<DataRow>.generate(
-                      40,
-                      (index) => DataRow(cells: [
-                            DataCell(Text('A' * (10 - index % 10))),
-                            DataCell(Text('B' * (10 - (index + 5) % 10))),
-                            DataCell(Text('C' * (15 - (index + 5) % 10))),
-                            DataCell(Text('D' * (15 - (index + 10) % 10))),
-                          ]))),
+                sortAscending: true,
+                columnSpacing: 12,
+                horizontalMargin: 12,
+                minWidth: 600,
+                columns: [
+                  DataColumn(
+                    onSort: (i, b) {},
+                    label: Text('Product Name'),
+                  ),
+                  DataColumn(
+                    label: Text('Product Description'),
+                  ),
+                  DataColumn(
+                    label: Text('Quantity'),
+                  ),
+                  DataColumn(
+                    label: Text('Price'),
+                  ),
+                ],
+                rows: List<DataRow>.generate(
+                  15,
+                  (index) => DataRow(
+                    cells: [
+                      DataCell(Text('P' * (10 - (index + 5) % 10))),
+                      DataCell(Text('B' * (10 - (index + 5) % 10))),
+                      DataCell(Text('C' * (15 - (index + 5) % 10))),
+                      DataCell(Text('D' * (15 - (index + 10) % 10))),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ),
@@ -108,9 +125,9 @@ class _InventoryScreenState extends State<InventoryScreen> {
 
 List<ExpenseData> getchartData() {
   final List<ExpenseData> chartData = [
-    ExpenseData('Jan', 40, 40, 45, 60),
+    ExpenseData('Jan', 20, 40, 45, 60),
     ExpenseData('Feb', 30, 31, 45, 65),
-    ExpenseData('Mar', 60, 40, 5, 70),
+    ExpenseData('Mar', 40, 40, 5, 70),
     ExpenseData('Apr', 50, 56, 45, 66),
     ExpenseData('May', 60, 20, 11, 56),
     ExpenseData('Jun', 70, 22, 56, 40),
