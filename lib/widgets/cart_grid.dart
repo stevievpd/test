@@ -189,7 +189,7 @@ class CartGrid extends StatelessWidget {
                             ? null
                             : () {
                                 Provider.of<Orders>(context, listen: false)
-                                    .addOrder(
+                                    .addOrders(
                                   cart.items.values.toList(),
                                   cart.totalAmount,
                                 );

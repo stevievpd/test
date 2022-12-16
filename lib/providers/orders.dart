@@ -28,24 +28,24 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
-  Future<void> addOrder(List<CartItem> cartProducts, double total) async {
-    var url = Uri.parse("http://${dotenv.env['apiUrl']}/order/insert-order");
-    try {
-      final response = await http.post(url);
-    } catch (e) {
-      rethrow;
-    }
-    _orders.insert(
-      0,
-      OrderItem(
-        id: DateTime.now().toString(),
-        amount: total,
-        dateTime: DateTime.now(),
-        products: cartProducts,
-      ),
-    );
-    notifyListeners();
-  }
+  // Future<void> addOrder(List<CartItem> cartProducts, double total) async {
+  //   var url = Uri.parse("http://${dotenv.env['apiUrl']}/order/add-order");
+  //   try {
+  //     final response = await http.post(url);
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  //   _orders.insert(
+  //     0,
+  //     OrderItem(
+  //       id: DateTime.now().toString(),
+  //       amount: total,
+  //       dateTime: DateTime.now(),
+  //       products: cartProducts,
+  //     ),
+  //   );
+  //   notifyListeners();
+  // }
 
   void clearOrderList() {
     _orders = [];
@@ -53,32 +53,41 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> addOrders(List<CartItem> cartProducts, double total) async {
-    final url = Uri.https("http://${dotenv.env['apiUrl']}/order/insert-order");
+    final url = Uri.parse("http://${dotenv.env['apiUrl']}/order/add-order");
     final timestamp = DateTime.now();
-    final response = await http.post(
-      url,
-      body: json.encode({
-        'amount': total,
-        'dateTime': timestamp.toIso8601String(),
-        'products': cartProducts
-            .map((cp) => {
-                  'id': cp.id,
-                  'title': cp.title,
-                  'quantity': cp.quantity,
-                  'price': cp.price,
-                })
-            .toList(),
-      }),
-    );
-    _orders.insert(
-      0,
-      OrderItem(
-        id: json.decode(response.body)['name'],
-        amount: total,
-        dateTime: timestamp,
-        products: cartProducts,
-      ),
-    );
+    try {
+      final response = await http.post(
+        headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json"
+        },
+        url,
+        body: json.encode({
+          'amount': total,
+          'dateTime': timestamp.toIso8601String(),
+          'products': cartProducts
+              .map((cp) => {
+                    'id': cp.id,
+                    'title': cp.title,
+                    'quantity': cp.quantity,
+                    'price': cp.price,
+                  })
+              .toList(),
+          "storeId": 1,
+        }),
+      );
+      _orders.insert(
+        0,
+        OrderItem(
+          id: json.decode(response.body)['name'],
+          amount: total,
+          dateTime: timestamp,
+          products: cartProducts,
+        ),
+      );
+    } catch (err) {
+      rethrow;
+    }
     notifyListeners();
   }
 }
