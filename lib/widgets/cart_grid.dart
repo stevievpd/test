@@ -19,7 +19,7 @@ class CartGrid extends StatelessWidget {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.05,
+          height: MediaQuery.of(context).size.height * 0.04,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

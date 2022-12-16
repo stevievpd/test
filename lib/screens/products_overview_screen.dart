@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/screens/inventory_screen.dart';
-import 'package:flutter_complete_guide/screens/more_screen.dart';
-import 'package:flutter_complete_guide/screens/orders_screen.dart';
-import 'package:flutter_complete_guide/screens/user_product_screen.dart';
+import './inventory_screen.dart';
+import './more_screen.dart';
+import './orders_screen.dart';
+import './user_product_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/app_drawer.dart';
 import '../widgets/category_grid.dart';
 import '../widgets/products_grid.dart';
-import '../widgets/badge.dart';
-import '../providers/cart.dart';
 import '../widgets/cart_grid.dart';
+import '../providers/products.dart';
+import '../providers/category.dart';
 
 enum FilterOptions {
   Favorites,
@@ -83,6 +83,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final productData = Provider.of<Products>(context);
+    final categoryData = Provider.of<CategoriesItem>(context);
     var screenSize = MediaQuery.of(context).size;
     return Row(
       children: [
@@ -90,12 +92,14 @@ class MenuScreen extends StatelessWidget {
           children: [
             SizedBox(
               width: screenSize.width * 0.75,
-              height: screenSize.height * 0.18,
+              height: screenSize.height * 0.16,
               child: DecoratedBox(
                 decoration: BoxDecoration(color: const Color(0xff1f2029)),
                 child: Padding(
                   padding: const EdgeInsets.all(30),
-                  child: CategoryGrid(),
+                  child: RefreshIndicator(
+                      onRefresh: categoryData.fetchCategories,
+                      child: CategoryGrid()),
                 ),
               ),
             ),
@@ -107,7 +111,9 @@ class MenuScreen extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 25.0, right: 25, top: 10),
-                  child: ProductsGrid(),
+                  child: RefreshIndicator(
+                      onRefresh: productData.fetchProducts,
+                      child: ProductsGrid()),
                 ),
               ),
             ),

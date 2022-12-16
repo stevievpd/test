@@ -34,7 +34,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchProducts() async {
-    var url = Uri.parse("http://${dotenv.env['apiUrl']}/meals/get-all-product");
+    var url =
+        Uri.parse("http://${dotenv.env['apiUrl']}/products/get-all-products");
     try {
       final response = await http.get(url);
       var data = json.decode(response.body);
@@ -44,6 +45,8 @@ class Products with ChangeNotifier {
           rest.map<Product>((json) => Product.fromJson(json)).toList();
       _items = loadedMeals;
       notifyListeners();
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
   }
 }

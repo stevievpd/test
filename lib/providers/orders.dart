@@ -32,7 +32,9 @@ class Orders with ChangeNotifier {
     var url = Uri.parse("http://${dotenv.env['apiUrl']}/order/insert-order");
     try {
       final response = await http.post(url);
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
     _orders.insert(
       0,
       OrderItem(
