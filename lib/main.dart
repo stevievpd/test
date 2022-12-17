@@ -10,6 +10,7 @@ import './providers/cart.dart';
 import './providers/orders.dart';
 import './screens/orders_screen.dart';
 import 'providers/category.dart';
+import './screens/auth_screen.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.deepOrange,
             fontFamily: 'Lato',
           ),
-          home: ProductsOverviewScreen(),
+          home: AuthScreen(),
           routes: {
             CartGrid.routeName: (ctx) => CartGrid(),
             OrdersScreen.routeName: (ctx) => OrdersScreen(),
