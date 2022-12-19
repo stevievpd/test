@@ -101,7 +101,7 @@ class MenuScreen extends StatelessWidget {
                       onRefresh: categoryData.fetchCategories,
                       child: CategoryGrid()),
                 ),
-              ),
+              ), 
             ),
             SizedBox(
               width: screenSize.width * 0.75,
