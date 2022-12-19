@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-import 'widgets/cart_grid.dart';
-import './screens/products_overview_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
+import './providers/category.dart';
+import './providers/auth.dart';
 import './screens/orders_screen.dart';
-import 'providers/category.dart';
 import './screens/auth_screen.dart';
+import './widgets/cart_grid.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: Auth()),
         ChangeNotifierProvider(
           create: (_) => Products(),
         ),
@@ -42,9 +43,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'MyShop',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
-            accentColor: Colors.deepOrange,
             fontFamily: 'Lato',
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                .copyWith(secondary: Colors.deepOrange),
           ),
           home: AuthScreen(),
           routes: {

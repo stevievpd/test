@@ -1,6 +1,10 @@
-import 'dart:math';
+// ignore_for_file: constant_identifier_names, use_key_in_widget_constructors, prefer_const_constructors
 
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/auth.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -25,7 +29,7 @@ class AuthScreen extends StatelessWidget {
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                stops: [0, 1],
+                stops: const [0, 1],
               ),
             ),
           ),
@@ -59,7 +63,7 @@ class AuthScreen extends StatelessWidget {
                       child: Text(
                         'MyShop',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: Theme.of(context).textTheme.headline6!.color,
                           fontSize: 50,
                           fontFamily: 'Anton',
                           fontWeight: FontWeight.normal,
@@ -96,7 +100,7 @@ class _AuthCardState extends State<AuthCard> {
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
-  void _submit() {
+  void _submit() async {
     if (!_formKey.currentState!.validate()) {
       // Invalid!
       return;
@@ -107,8 +111,11 @@ class _AuthCardState extends State<AuthCard> {
     });
     if (_authMode == AuthMode.Login) {
       // Log user in
+      await Provider.of<Auth>(context, listen: false).signIn(
+          _authData['email'].toString(), _authData['password'].toString());
     } else {
-      // Sign user up
+      await Provider.of<Auth>(context, listen: false).signUp(
+          _authData['email'].toString(), _authData['password'].toString());
     }
     setState(() {
       _isLoading = false;
@@ -198,25 +205,24 @@ class _AuthCardState extends State<AuthCard> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 8),
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor:
                           Theme.of(context).primaryTextTheme.button!.color,
                     ),
+                    onPressed: _submit,
                     child:
                         Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
-                    onPressed: _submit,
                   ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 4),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     foregroundColor: Theme.of(context).primaryColor,
                   ),
+                  onPressed: _switchAuthMode,
                   child: Text(
                       '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
-                  onPressed: _switchAuthMode,
                 ),
               ],
             ),
