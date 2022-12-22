@@ -3,6 +3,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../providers/auth.dart';
 
@@ -92,8 +93,9 @@ class AuthCard extends StatefulWidget {
 
 class _AuthCardState extends State<AuthCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final storage = FlutterSecureStorage();
   AuthMode _authMode = AuthMode.Login;
-  Map<String, String> _authData = {
+  final Map<String, String> _authData = {
     'email': '',
     'password': '',
   };
@@ -160,7 +162,6 @@ class _AuthCardState extends State<AuthCard> {
                     if (value!.isEmpty || !value.contains('@')) {
                       return 'Invalid email!';
                     }
-                    return null;
                     return null;
                   },
                   onSaved: (value) {

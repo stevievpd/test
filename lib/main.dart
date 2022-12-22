@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:reality_pos/screens/products_overview_screen.dart';
 
 import './providers/products.dart';
 import './providers/cart.dart';
@@ -40,18 +41,21 @@ class MyApp extends StatelessWidget {
           create: (_) => CategoriesItem(),
         ),
       ],
-      child: MaterialApp(
-          title: 'MyShop',
-          theme: ThemeData(
-            fontFamily: 'Lato',
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-                .copyWith(secondary: Colors.deepOrange),
-          ),
-          home: AuthScreen(),
-          routes: {
-            CartGrid.routeName: (ctx) => CartGrid(),
-            OrdersScreen.routeName: (ctx) => OrdersScreen(),
-          }),
+      child: Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+            title: 'MyShop',
+            theme: ThemeData(
+              fontFamily: 'Lato',
+              colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                  .copyWith(secondary: Colors.deepOrange),
+            ),
+            home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+            routes: {
+              CartGrid.routeName: (ctx) => CartGrid(),
+              OrdersScreen.routeName: (ctx) => OrdersScreen(),
+              AuthScreen.routeName: (ctx) => AuthScreen(),
+            }),
+      ),
     );
   }
 }

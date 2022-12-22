@@ -2,19 +2,58 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:developer';
+import 'package:jwt_decode/jwt_decode.dart';
 
 class Auth with ChangeNotifier {
   late String _token;
   late DateTime _tokenExpiry;
   late String userId;
+  final storage = FlutterSecureStorage();
 
-  late var decodedJson;
+  dynamic decodedJson;
+
+  // Future get token async {
+  //   final result = await storage.read(key: "token");
+  //   isExpired = Jwt.isExpired(result.toString());
+  //   if (isExpired!) {
+  //     Map<String, dynamic> jwt = Jwt.parseJwt(result.toString());
+  //     return jwt;
+  //   }
+  //   return null;
+  // }
+
+  // bool get isAuth {
+  //   return token != null;
+  // }
+
+  bool get isAuth {
+    if (getTokenFromStorage == null) {
+      return false;
+    }
+    return true;
+  }
+
+  Future? get getTokenFromStorage async {
+    final result = await storage.read(key: "token");
+    if (result != null) {
+      return result;
+    }
+    return;
+  }
+
+  bool isExpired() {
+    bool expired = Jwt.isExpired(getTokenFromStorage.toString());
+    if (!expired) {
+      return false;
+    }
+    return true;
+  }
 
   Future<void> signIn(String email, String password) async {
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/auth/signin");
     try {
-      // log("1");
       final response = await http.post(
         url,
         headers: {
@@ -26,13 +65,11 @@ class Auth with ChangeNotifier {
           "password": password,
         }),
       );
-      // log("2");
       decodedJson = json.decode(response.body);
-      // log("3");
-      log(decodedJson.toString());
-      // log("4");
+      _token = decodedJson['token'];
+      await storage.write(key: "token", value: _token);
     } catch (err) {
-      log("error happened");
+      rethrow;
     }
   }
 
