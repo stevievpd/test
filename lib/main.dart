@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:reality_pos/screens/products_overview_screen.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
 import './providers/products.dart';
 import './providers/cart.dart';
@@ -19,6 +21,14 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final storage = FlutterSecureStorage();
+
+  Future<String> get jwtOrEmpty async {
+    var jwt = await storage.read(key: "token");
+    if (jwt == null) return "";
+    return jwt;
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -41,20 +51,35 @@ class MyApp extends StatelessWidget {
           create: (_) => CategoriesItem(),
         ),
       ],
-      child: Consumer<Auth>(
-        builder: (ctx, auth, _) => MaterialApp(
-            title: 'MyShop',
-            theme: ThemeData(
-              fontFamily: 'Lato',
-              colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-                  .copyWith(secondary: Colors.deepOrange),
-            ),
-            home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
-            routes: {
-              CartGrid.routeName: (ctx) => CartGrid(),
-              OrdersScreen.routeName: (ctx) => OrdersScreen(),
-              AuthScreen.routeName: (ctx) => AuthScreen(),
-            }),
+      child: MaterialApp(
+        title: 'MyShop',
+        theme: ThemeData(
+          fontFamily: 'Lato',
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+              .copyWith(secondary: Colors.deepOrange),
+        ),
+        home: FutureBuilder(
+          future: jwtOrEmpty,
+          builder: ((context, snapshot) {
+            if (!snapshot.hasData) return CircularProgressIndicator();
+            if (snapshot.data != "") {
+              var jwtToken = snapshot.data;
+              var isExpired = Jwt.isExpired(jwtToken.toString());
+              if (isExpired == false) {
+                return ProductsOverviewScreen();
+              } else {
+                return AuthScreen();
+              }
+            } else {
+              return AuthScreen();
+            }
+          }),
+        ),
+        routes: {
+          CartGrid.routeName: (ctx) => CartGrid(),
+          OrdersScreen.routeName: (ctx) => OrdersScreen(),
+          AuthScreen.routeName: (ctx) => AuthScreen(),
+        },
       ),
     );
   }

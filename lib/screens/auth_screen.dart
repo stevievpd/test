@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:reality_pos/screens/products_overview_screen.dart';
 
 import '../providers/auth.dart';
 
@@ -211,7 +212,17 @@ class _AuthCardState extends State<AuthCard> {
                       foregroundColor:
                           Theme.of(context).primaryTextTheme.button!.color,
                     ),
-                    onPressed: _submit,
+                    onPressed: () {
+                      _submit;
+                      if (_authMode == AuthMode.Login) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductsOverviewScreen(),
+                          ),
+                        );
+                      }
+                    },
                     child:
                         Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
                   ),

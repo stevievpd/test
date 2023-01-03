@@ -28,28 +28,25 @@ class Auth with ChangeNotifier {
   //   return token != null;
   // }
 
-  bool get isAuth {
-    if (getTokenFromStorage == null) {
-      return false;
-    }
-    return true;
-  }
+  // bool get isAuth {
+  //   if (getTokenFromStorage != null) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
-  Future? get getTokenFromStorage async {
-    final result = await storage.read(key: "token");
-    if (result != null) {
-      return result;
-    }
-    return;
-  }
+  // get getTokenFromStorage async {
+  //   final _token = await storage.read(key: "token");
+  //   print(_token);
+  //   bool expired = Jwt.isExpired(_token.toString());
 
-  bool isExpired() {
-    bool expired = Jwt.isExpired(getTokenFromStorage.toString());
-    if (!expired) {
-      return false;
-    }
-    return true;
-  }
+  //   if (_token != null && expired != true) {
+  //     return _token;
+  //   }
+  //   print("null result");
+  //   return null;
+  // }
 
   Future<void> signIn(String email, String password) async {
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/auth/signin");
@@ -68,6 +65,7 @@ class Auth with ChangeNotifier {
       decodedJson = json.decode(response.body);
       _token = decodedJson['token'];
       await storage.write(key: "token", value: _token);
+      notifyListeners();
     } catch (err) {
       rethrow;
     }

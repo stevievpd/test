@@ -51,6 +51,8 @@ class CategoriesItem with ChangeNotifier {
           rest.map<Categories>((json) => Categories.fromJson(json)).toList();
       _categoryList = loadedCategories;
       notifyListeners();
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
   }
 }
