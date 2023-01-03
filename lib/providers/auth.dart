@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:developer';
 import 'package:jwt_decode/jwt_decode.dart';
+import '../model/http_exception.dart';
 
 class Auth with ChangeNotifier {
   late String _token;
@@ -62,10 +63,14 @@ class Auth with ChangeNotifier {
           "password": password,
         }),
       );
-      decodedJson = json.decode(response.body);
-      _token = decodedJson['token'];
-      await storage.write(key: "token", value: _token);
-      notifyListeners();
+      if (response.statusCode == 200) {
+        decodedJson = json.decode(response.body);
+        _token = decodedJson['token'];
+        await storage.write(key: "token", value: _token);
+        notifyListeners();
+      } else if (response.statusCode == 401) {
+        throw HttpException("No user found with that email!");
+      }
     } catch (err) {
       rethrow;
     }

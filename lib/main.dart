@@ -21,7 +21,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future<String> get jwtOrEmpty async {
     var jwt = await storage.read(key: "token");
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         home: FutureBuilder(
           future: jwtOrEmpty,
           builder: ((context, snapshot) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
+            if (!snapshot.hasData) return const CircularProgressIndicator();
             if (snapshot.data != "") {
               var jwtToken = snapshot.data;
               var isExpired = Jwt.isExpired(jwtToken.toString());

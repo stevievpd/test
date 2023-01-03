@@ -4,9 +4,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:reality_pos/screens/products_overview_screen.dart';
 
+import '../model/auth_exception.dart';
+import './products_overview_screen.dart';
 import '../providers/auth.dart';
+import '../model/http_exception.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -100,29 +102,26 @@ class _AuthCardState extends State<AuthCard> {
     'email': '',
     'password': '',
   };
-  var _isLoading = false;
   final _passwordController = TextEditingController();
 
-  void _submit() async {
+  Future _submit() async {
     if (!_formKey.currentState!.validate()) {
       // Invalid!
-      return;
+      return false;
     }
     _formKey.currentState!.save();
-    setState(() {
-      _isLoading = true;
-    });
     if (_authMode == AuthMode.Login) {
       // Log user in
       await Provider.of<Auth>(context, listen: false).signIn(
-          _authData['email'].toString(), _authData['password'].toString());
+        _authData['email'].toString(),
+        _authData['password'].toString(),
+      );
     } else {
       await Provider.of<Auth>(context, listen: false).signUp(
-          _authData['email'].toString(), _authData['password'].toString());
+        _authData['email'].toString(),
+        _authData['password'].toString(),
+      );
     }
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   void _switchAuthMode() {
@@ -198,22 +197,19 @@ class _AuthCardState extends State<AuthCard> {
                 SizedBox(
                   height: 20,
                 ),
-                if (_isLoading)
-                  CircularProgressIndicator()
-                else
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-                      backgroundColor: Theme.of(context).primaryColor,
-                      foregroundColor:
-                          Theme.of(context).primaryTextTheme.button!.color,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    onPressed: () {
-                      _submit;
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor:
+                        Theme.of(context).primaryTextTheme.button!.color,
+                  ),
+                  onPressed: () async {
+                    try {
+                      await _submit();
                       if (_authMode == AuthMode.Login) {
                         Navigator.push(
                           context,
@@ -222,10 +218,11 @@ class _AuthCardState extends State<AuthCard> {
                           ),
                         );
                       }
-                    },
-                    child:
-                        Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
-                  ),
+                    } catch (error) {}
+                  },
+                  child:
+                      Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
+                ),
                 TextButton(
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 4),
@@ -243,4 +240,24 @@ class _AuthCardState extends State<AuthCard> {
       ),
     );
   }
+}
+
+Future<void> _showDialog1(BuildContext context, String error) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Alert'),
+        content: Text(error),
+        actions: [
+          TextButton(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
