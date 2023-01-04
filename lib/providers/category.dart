@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+const storage = FlutterSecureStorage();
 
 class Categories with ChangeNotifier {
   int? id;
@@ -40,10 +45,16 @@ class CategoriesItem with ChangeNotifier {
   }
 
   Future<void> fetchCategories() async {
+    final token = await storage.read(key: "token");
+    log(token.toString());
     var url = Uri.parse(
         "http://${dotenv.env['apiUrl']}/categories/get-all-categories");
     try {
-      final response = await http.get(url);
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
       var data = json.decode(response.body);
       var rest = data as List;
       List<Categories> loadedCategories;
