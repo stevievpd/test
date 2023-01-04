@@ -2,11 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:reality_pos/providers/category.dart';
 import 'package:reality_pos/screens/auth_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/orders_screen.dart';
 import '../providers/auth.dart';
+import '../providers/products.dart';
 
 class AppDrawer extends StatelessWidget {
   final storage = FlutterSecureStorage();
@@ -43,7 +45,9 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {
-              // Provider.of<Auth>(context, listen: false).logout;
+              Provider.of<CategoriesItem>(context, listen: false)
+                  .clearCategories;
+              Provider.of<Products>(context, listen: false).clearProducts;
               await storage.delete(key: "token");
               Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
             },

@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './cart.dart';
+
+const storage = FlutterSecureStorage();
 
 double? discountAmount = 0.0;
 
@@ -53,13 +58,16 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> addOrders(List<CartItem> cartProducts, double total) async {
+    final token = await storage.read(key: "token");
+    log(token.toString());
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/order/add-order");
     final timestamp = DateTime.now();
     try {
       final response = await http.post(
         headers: {
-          "Content-type": "application/json",
-          "Accept": "application/json"
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
         },
         url,
         body: json.encode({

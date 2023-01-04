@@ -46,7 +46,6 @@ class CategoriesItem with ChangeNotifier {
 
   Future<void> fetchCategories() async {
     final token = await storage.read(key: "token");
-    log(token.toString());
     var url = Uri.parse(
         "http://${dotenv.env['apiUrl']}/categories/get-all-categories");
     try {
@@ -65,5 +64,10 @@ class CategoriesItem with ChangeNotifier {
     } catch (e) {
       rethrow;
     }
+  }
+
+  clearCategories() {
+    List<Categories> _categoryList = [];
+    notifyListeners();
   }
 }

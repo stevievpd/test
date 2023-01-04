@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../model/auth_exception.dart';
 import './products_overview_screen.dart';
 import '../providers/auth.dart';
-import '../model/http_exception.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -172,11 +170,11 @@ class _AuthCardState extends State<AuthCard> {
                   decoration: InputDecoration(labelText: 'Password'),
                   obscureText: true,
                   controller: _passwordController,
-                  validator: (value) {
-                    if (value!.isEmpty || value.length < 5) {
-                      return 'Password is too short!';
-                    }
-                  },
+                  // validator: (value) {
+                  //   if (value!.isEmpty || value.length < 5) {
+                  //     return 'Password is too short!';
+                  //   }
+                  // },
                   onSaved: (value) {
                     _authData['password'] = value.toString();
                   },

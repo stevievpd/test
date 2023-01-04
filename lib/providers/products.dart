@@ -57,4 +57,9 @@ class Products with ChangeNotifier {
       rethrow;
     }
   }
+
+  clearProducts() {
+    List<Product> _items = [];
+    notifyListeners();
+  }
 }
