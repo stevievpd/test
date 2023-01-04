@@ -51,28 +51,24 @@ class Auth with ChangeNotifier {
 
   Future<void> signIn(String email, String password) async {
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/auth/signin");
-    try {
-      final response = await http.post(
-        url,
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: json.encode({
-          "email": email,
-          "password": password,
-        }),
-      );
-      if (response.statusCode == 200) {
-        decodedJson = json.decode(response.body);
-        _token = decodedJson['token'];
-        await storage.write(key: "token", value: _token);
-        notifyListeners();
-      } else if (response.statusCode == 401) {
-        throw HttpException("No user found with that email!");
-      }
-    } catch (err) {
-      rethrow;
+    final response = await http.post(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: json.encode({
+        "email": email,
+        "password": password,
+      }),
+    );
+    if (response.statusCode == 200) {
+      decodedJson = json.decode(response.body);
+      _token = decodedJson['token'];
+      await storage.write(key: "token", value: _token);
+      notifyListeners();
+    } else if (response.statusCode == 401) {
+      throw HttpException("Wrong email or password!");
     }
   }
 

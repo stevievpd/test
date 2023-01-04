@@ -218,7 +218,9 @@ class _AuthCardState extends State<AuthCard> {
                           ),
                         );
                       }
-                    } catch (error) {}
+                    } catch (error) {
+                      _showDialog1(context, error.toString());
+                    }
                   },
                   child:
                       Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
@@ -242,12 +244,12 @@ class _AuthCardState extends State<AuthCard> {
   }
 }
 
-Future<void> _showDialog1(BuildContext context, String error) {
+Future<void> _showDialog1(BuildContext context, error) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Alert'),
+        title: Text('Login failed'),
         content: Text(error),
         actions: [
           TextButton(
