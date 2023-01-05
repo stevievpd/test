@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names, use_key_in_widget_constructors, prefer_const_constructors
 
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -95,6 +96,7 @@ class AuthCard extends StatefulWidget {
 class _AuthCardState extends State<AuthCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final storage = FlutterSecureStorage();
+
   AuthMode _authMode = AuthMode.Login;
   final Map<String, String> _authData = {
     'email': '',
@@ -170,11 +172,7 @@ class _AuthCardState extends State<AuthCard> {
                   decoration: InputDecoration(labelText: 'Password'),
                   obscureText: true,
                   controller: _passwordController,
-                  // validator: (value) {
-                  //   if (value!.isEmpty || value.length < 5) {
-                  //     return 'Password is too short!';
-                  //   }
-                  // },
+                  autofocus: false,
                   onSaved: (value) {
                     _authData['password'] = value.toString();
                   },
@@ -216,6 +214,9 @@ class _AuthCardState extends State<AuthCard> {
                           ),
                         );
                       }
+                    } on TimeoutException catch (_) {
+                      _showDialog1(
+                          context, "Request timed out. Please try again!");
                     } catch (error) {
                       _showDialog1(context, error.toString());
                     }

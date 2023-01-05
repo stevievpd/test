@@ -51,17 +51,25 @@ class Auth with ChangeNotifier {
 
   Future<void> signIn(String email, String password) async {
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/auth/signin");
-    final response = await http.post(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: json.encode({
-        "email": email,
-        "password": password,
-      }),
-    );
+    final response = await http
+        .post(
+          url,
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: json.encode({
+            "email": email,
+            "password": password,
+          }),
+        )
+        .timeout(
+          const Duration(seconds: 3),
+        );
+    if (response.body.isEmpty) {
+      throw HttpException(
+          "Could not log you in at this time. Please try again later!");
+    }
     if (response.statusCode == 200) {
       decodedJson = json.decode(response.body);
       _token = decodedJson['token'];
