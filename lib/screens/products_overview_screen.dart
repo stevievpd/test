@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import './inventory_screen.dart';
 import './more_screen.dart';
 import './orders_screen.dart';
-import './user_product_screen.dart';
-import 'package:provider/provider.dart';
-
 import '../widgets/app_drawer.dart';
 import '../widgets/category_grid.dart';
 import '../widgets/products_grid.dart';
 import '../widgets/cart_grid.dart';
 import '../providers/products.dart';
 import '../providers/category.dart';
-
-enum FilterOptions {
-  Favorites,
-  All,
-}
+import '../widgets/confirm_exit_app.dart';
 
 class ProductsOverviewScreen extends StatefulWidget {
+  const ProductsOverviewScreen({super.key});
+
   @override
   _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
 }
@@ -29,7 +26,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     MenuScreen(),
     OrdersScreen(),
     InventoryScreen(),
-    MoreScreen(),
+    const MoreScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,41 +37,43 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('My Shop'),
-        backgroundColor: const Color(0xff1f2029),
-      ),
-      drawer: AppDrawer(),
-      body: SafeArea(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xff1f2029),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_checkout),
-            label: 'Checkout',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long),
-            label: 'Transactions',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory_2),
-            label: 'Inventory',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more),
-            label: 'More',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepOrange,
-        unselectedItemColor: Colors.white,
-        onTap: _onItemTapped,
+    return ConfirmExit(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text('My Shop'),
+          backgroundColor: const Color(0xff1f2029),
+        ),
+        drawer: AppDrawer(),
+        body: SafeArea(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: const Color(0xff1f2029),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart_checkout),
+              label: 'Checkout',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.receipt_long),
+              label: 'Transactions',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.inventory_2),
+              label: 'Inventory',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.more),
+              label: 'More',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.deepOrange,
+          unselectedItemColor: Colors.white,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
@@ -101,7 +100,7 @@ class MenuScreen extends StatelessWidget {
                       onRefresh: categoryData.fetchCategories,
                       child: CategoryGrid()),
                 ),
-              ), 
+              ),
             ),
             SizedBox(
               width: screenSize.width * 0.75,
