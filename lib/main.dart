@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: Auth()),

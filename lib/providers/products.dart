@@ -59,7 +59,7 @@ class Products with ChangeNotifier {
   }
 
   clearProducts() {
-    List<Product> _items = [];
+    _items = [];
     notifyListeners();
   }
 }

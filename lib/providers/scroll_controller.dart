@@ -5,6 +5,8 @@ ScrollController controller = ScrollController();
 
 class ScrollControl {
   void scrollDown() {
-    controller.jumpTo(controller.position.maxScrollExtent);
+    if (controller.hasClients) {
+      controller.jumpTo(controller.position.maxScrollExtent);
+    }
   }
 }
