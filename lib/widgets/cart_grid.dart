@@ -19,7 +19,7 @@ class CartGrid extends StatelessWidget {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.05,
+          height: MediaQuery.of(context).size.height * 0.04,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -189,7 +189,7 @@ class CartGrid extends StatelessWidget {
                             ? null
                             : () {
                                 Provider.of<Orders>(context, listen: false)
-                                    .addOrder(
+                                    .addOrders(
                                   cart.items.values.toList(),
                                   cart.totalAmount,
                                 );

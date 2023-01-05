@@ -3,8 +3,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'category.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './product.dart';
+
+const storage = FlutterSecureStorage();
 
 class Products with ChangeNotifier {
   List<Product> productList = [];
@@ -34,9 +37,15 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchProducts() async {
-    var url = Uri.parse("http://${dotenv.env['apiUrl']}/meals/get-all-product");
+    final token = await storage.read(key: "token");
+    var url =
+        Uri.parse("http://${dotenv.env['apiUrl']}/products/get-all-products");
     try {
-      final response = await http.get(url);
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
       var data = json.decode(response.body);
       var rest = data as List;
       List<Product> loadedMeals;
@@ -44,6 +53,13 @@ class Products with ChangeNotifier {
           rest.map<Product>((json) => Product.fromJson(json)).toList();
       _items = loadedMeals;
       notifyListeners();
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  clearProducts() {
+    List<Product> _items = [];
+    notifyListeners();
   }
 }
