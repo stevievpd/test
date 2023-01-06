@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reality_pos/screens/checkout_screen.dart';
@@ -12,6 +10,8 @@ import '../providers/scroll_controller.dart';
 
 class CartGrid extends StatelessWidget {
   static const routeName = '/cart';
+
+  const CartGrid({super.key});
 
   @override
   Widget build(BuildContext context) {

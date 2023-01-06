@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'category.dart';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './product.dart';
@@ -51,15 +51,15 @@ class Products with ChangeNotifier {
       List<Product> loadedMeals;
       loadedMeals =
           rest.map<Product>((json) => Product.fromJson(json)).toList();
-      productList = loadedMeals;
+      _items = loadedMeals;
       notifyListeners();
     } catch (e) {
       rethrow;
     }
   }
 
-  clearProducts() {
-    productList = [];
+  void clearProducts() {
+    productList.clear();
     notifyListeners();
   }
 }
