@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:reality_pos/model/http_exception.dart';
 
 import './products_overview_screen.dart';
 import '../providers/auth.dart';
@@ -113,15 +114,27 @@ class _AuthCardState extends State<AuthCard> {
     _formKey.currentState!.save();
     if (_authMode == AuthMode.Login) {
       // Log user in
-      await Provider.of<Auth>(context, listen: false).signIn(
+      final signInStatus =
+          await Provider.of<Auth>(context, listen: false).signIn(
         _authData['email'].toString(),
         _authData['password'].toString(),
       );
+      if (signInStatus) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      await Provider.of<Auth>(context, listen: false).signUp(
+      final signUpStatus =
+          await Provider.of<Auth>(context, listen: false).signUp(
         _authData['email'].toString(),
         _authData['password'].toString(),
       );
+      if (signUpStatus) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
@@ -162,7 +175,7 @@ class _AuthCardState extends State<AuthCard> {
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
-                        return 'Invalid email!';
+                        throw HttpException('Invalid email!');
                       }
                       return null;
                     },
@@ -188,8 +201,9 @@ class _AuthCardState extends State<AuthCard> {
                       validator: _authMode == AuthMode.Signup
                           ? (value) {
                               if (value != _passwordController.text) {
-                                return 'Passwords do not match!';
+                                throw HttpException("Passwords do not match!");
                               }
+                              return null;
                             }
                           : null,
                     ),
@@ -209,14 +223,19 @@ class _AuthCardState extends State<AuthCard> {
                     ),
                     onPressed: () async {
                       try {
-                        await _submit();
-                        if (_authMode == AuthMode.Login) {
-                          if (!mounted) return;
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (_) => ProductsOverviewScreen(),
-                            ),
-                          );
+                        final status = await _submit();
+                        if (status) {
+                          if (_authMode == AuthMode.Login) {
+                            if (!mounted) return;
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (_) => ProductsOverviewScreen(),
+                              ),
+                            );
+                          }
+                        } else {
+                          throw HttpException(
+                              "Could not sign you in at this time. Please try again later.");
                         }
                       } on TimeoutException catch (_) {
                         _showDialog1(

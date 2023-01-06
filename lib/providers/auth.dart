@@ -49,7 +49,7 @@ class Auth with ChangeNotifier {
   //   return null;
   // }
 
-  Future<void> signIn(String email, String password) async {
+  Future<dynamic> signIn(String email, String password) async {
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/auth/signin");
     final response = await http
         .post(
@@ -75,14 +75,15 @@ class Auth with ChangeNotifier {
       _token = decodedJson['token'];
       await storage.write(key: "token", value: _token);
       notifyListeners();
+      return true;
     } else if (response.statusCode == 401) {
       throw HttpException("Wrong email or password!");
     }
   }
 
-  Future<void> signUp(String email, String password) async {
+  Future<dynamic> signUp(String email, String password) async {
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/auth/signup");
-    await http.put(
+    final response = await http.put(
       url,
       headers: {
         "Content-Type": "application/json",
@@ -94,5 +95,8 @@ class Auth with ChangeNotifier {
         "storeId": "1",
       }),
     );
+    if (response.statusCode == 201) {
+      return true;
+    }
   }
 }
