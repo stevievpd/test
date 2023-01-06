@@ -200,7 +200,7 @@ class CartGrid extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const CheckoutScreen(),
+                              builder: (context) => CheckoutScreen(),
                             ),
                           );
                         },

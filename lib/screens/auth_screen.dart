@@ -5,8 +5,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:reality_pos/model/http_exception.dart';
 
+import '../model/http_exception.dart';
 import './products_overview_screen.dart';
 import '../providers/auth.dart';
 import '../widgets/confirm_exit_app.dart';
