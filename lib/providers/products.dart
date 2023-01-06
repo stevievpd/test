@@ -51,7 +51,7 @@ class Products with ChangeNotifier {
       List<Product> loadedMeals;
       loadedMeals =
           rest.map<Product>((json) => Product.fromJson(json)).toList();
-      _items = loadedMeals;
+      productList = loadedMeals;
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -59,7 +59,7 @@ class Products with ChangeNotifier {
   }
 
   clearProducts() {
-    _items = [];
+    productList = [];
     notifyListeners();
   }
 }

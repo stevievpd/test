@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:reality_pos/providers/cart.dart';
 import 'package:reality_pos/providers/category.dart';
 import 'package:reality_pos/screens/auth_screen.dart';
 import 'package:provider/provider.dart';
@@ -48,6 +49,7 @@ class AppDrawer extends StatelessWidget {
               Provider.of<CategoriesItem>(context, listen: false)
                   .clearCategories;
               Provider.of<Products>(context, listen: false).clearProducts;
+              Provider.of<Cart>(context, listen: false).clear();
               await storage.delete(key: "token");
               navigator.pushReplacementNamed(AuthScreen.routeName);
             },

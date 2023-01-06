@@ -17,7 +17,7 @@ class _ProductsGridState extends State<ProductsGrid> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<Products>(context, listen: false).fetchProducts();
+      Provider.of<Products>(context).fetchProducts();
     }
     _isInit = false;
     super.didChangeDependencies();
