@@ -3,10 +3,24 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 import '../providers/cart.dart';
+import '../providers/orders.dart';
 import '../widgets/ticket.dart';
 
-class CheckoutScreen extends StatelessWidget {
+class CheckoutScreen extends StatefulWidget {
   CheckoutScreen({super.key});
+
+  @override
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
+  final cashPaymentController = TextEditingController();
+
+  @override
+  void dispose() {
+    cashPaymentController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +99,33 @@ class CheckoutScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         const Expanded(flex: 1, child: Icon(Icons.money)),
-                        const Expanded(flex: 3, child: TextField()),
+                        Expanded(
+                          flex: 3,
+                          child: TextField(
+                            controller: cashPaymentController,
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
                         Expanded(
                             flex: 1,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: cart.totalAmount <= 0
+                                  ? null
+                                  : () async {
+                                      var cashPayment = double.parse(
+                                          cashPaymentController.text);
+                                      var cashChange =
+                                          cashPayment - cart.totalAmount;
+                                      await Provider.of<Orders>(context,
+                                              listen: false)
+                                          .addOrders(
+                                        cart.items.values.toList(),
+                                        cart.totalAmount,
+                                        cashPayment,
+                                        cashChange,
+                                      );
+                                      cart.clear();
+                                    },
                               child: const Text("CHARGE"),
                             )),
                       ],

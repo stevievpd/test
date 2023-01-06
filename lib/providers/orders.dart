@@ -17,12 +17,16 @@ class OrderItem {
   final double amount;
   final List<CartItem> products;
   final DateTime dateTime;
+  final double cashPayment;
+  final double? cashChange;
 
   OrderItem({
     required this.id,
     required this.amount,
     required this.products,
     required this.dateTime,
+    required this.cashPayment,
+    this.cashChange,
   });
 }
 
@@ -57,7 +61,8 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addOrders(List<CartItem> cartProducts, double total) async {
+  Future<void> addOrders(List<CartItem> cartProducts, double total,
+      double cashPayment, double? cashChange) async {
     final token = await storage.read(key: "token");
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/order/add-order");
     final timestamp = DateTime.now();
@@ -71,6 +76,8 @@ class Orders with ChangeNotifier {
         url,
         body: json.encode({
           'amount': total,
+          'cashPayment': cashPayment,
+          'cashChange': cashChange,
           'dateTime': timestamp.toIso8601String(),
           'products': cartProducts
               .map((cp) => {
