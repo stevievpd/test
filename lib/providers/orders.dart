@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
 import './cart.dart';
 
@@ -64,6 +65,7 @@ class Orders with ChangeNotifier {
   Future<void> addOrders(List<CartItem> cartProducts, double total,
       double cashPayment, double? cashChange) async {
     final token = await storage.read(key: "token");
+    final jwtParsed = Jwt.parseJwt(token.toString());
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/order/add-order");
     final timestamp = DateTime.now();
     try {
@@ -87,7 +89,7 @@ class Orders with ChangeNotifier {
                     'price': cp.price,
                   })
               .toList(),
-          "storeId": 1,
+          "storeId": jwtParsed["storeId"],
         }),
       );
       // _orders.insert(
