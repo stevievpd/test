@@ -26,19 +26,6 @@ class ProductItem extends StatelessWidget {
                 cart.addItem(
                     productData.id, productData.price, productData.title);
                 ScrollControl().scrollDown();
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    duration: const Duration(milliseconds: 5),
-                    content: const Text("Added to cart!"),
-                    action: SnackBarAction(
-                      label: 'UNDO',
-                      onPressed: () {
-                        cart.removeSingleItem(productData.id);
-                      },
-                    ),
-                  ),
-                );
               },
               splashColor: Colors.blue[100],
               child: ClipRRect(
