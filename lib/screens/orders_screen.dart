@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +33,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     width: MediaQuery.of(context).size.width * 0.2,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Text('ONLINE'),
+                      child: const Text('ONLINE'),
                     ),
                   ),
                   SizedBox(
@@ -43,7 +41,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     width: MediaQuery.of(context).size.width * 0.2,
                     child: OutlinedButton(
                       onPressed: () {},
-                      child: Text('OFFLINE'),
+                      child: const Text('OFFLINE'),
                     ),
                   ),
                 ],
@@ -106,15 +104,15 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 columns: [
                   DataColumn(
                     onSort: (i, b) {},
-                    label: Text('Order ID'),
+                    label: const Text('Order ID'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Date'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Sale'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Items'),
                   ),
                 ],

@@ -1,7 +1,4 @@
-// ignore_for_file: sdk_version_ui_as_code, prefer_const_constructors
-
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +20,7 @@ class _OrderItemState extends State<OrderItem> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      margin: EdgeInsets.all(4),
+      margin: const EdgeInsets.all(4),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -43,7 +40,7 @@ class _OrderItemState extends State<OrderItem> {
           ),
           if (_expanded)
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
               height: min(widget.order.products.length * 20.0 + 40, 100),
               child: ListView(
                 children: widget.order.products
@@ -53,14 +50,14 @@ class _OrderItemState extends State<OrderItem> {
                         children: <Widget>[
                           Text(
                             prod.title,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             '${prod.quantity}x P ${prod.price}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               color: Colors.grey,
                             ),

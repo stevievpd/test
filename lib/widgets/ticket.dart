@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +46,7 @@ class Ticket extends StatelessWidget {
                 ),
                 Text(
                   'P ${cart.subTotal.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
@@ -67,7 +65,7 @@ class Ticket extends StatelessWidget {
                 ),
                 Text(
                   'P ${cart.totalTax.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
@@ -86,7 +84,7 @@ class Ticket extends StatelessWidget {
                 ),
                 Text(
                   'P ${cart.totalAmount.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),

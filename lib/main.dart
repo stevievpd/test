@@ -75,17 +75,17 @@ class MyApp extends StatelessWidget {
               if (isExpired == false) {
                 return const ProductsOverviewScreen();
               } else {
-                return AuthScreen();
+                return const AuthScreen();
               }
             } else {
-              return AuthScreen();
+              return const AuthScreen();
             }
           }),
         ),
         routes: {
           CartGrid.routeName: (ctx) => const CartGrid(),
           OrdersScreen.routeName: (ctx) => const OrdersScreen(),
-          AuthScreen.routeName: (ctx) => AuthScreen(),
+          AuthScreen.routeName: (ctx) => const AuthScreen(),
         },
       ),
     );

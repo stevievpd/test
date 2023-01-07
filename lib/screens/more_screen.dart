@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -13,8 +11,8 @@ class MoreScreen extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
+            children: const [
+              Text(
                 'Welcome Back',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
@@ -22,8 +20,8 @@ class MoreScreen extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Padding(
+            children: const [
+              Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 30),
                 child: Text(
                   'My Business',
@@ -39,10 +37,10 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Align(
+                    label: const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Orders',
@@ -50,7 +48,7 @@ class MoreScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     ),
-                    icon: Icon(Icons.shopping_basket),
+                    icon: const Icon(Icons.shopping_basket),
                   ),
                 ),
               ),
@@ -58,15 +56,15 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
+                    label: const Text(
                       'Reports',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    icon: Icon(Icons.bar_chart),
+                    icon: const Icon(Icons.bar_chart),
                   ),
                 ),
               ),
@@ -79,15 +77,15 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
+                    label: const Text(
                       'Items',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    icon: Icon(Icons.inventory),
+                    icon: const Icon(Icons.inventory),
                   ),
                 ),
               ),
@@ -95,15 +93,15 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
+                    label: const Text(
                       'Customers',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    icon: Icon(Icons.person),
+                    icon: const Icon(Icons.person),
                   ),
                 ),
               ),
@@ -116,15 +114,15 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
+                    label: const Text(
                       'Add-ons',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    icon: Icon(Icons.qr_code_2),
+                    icon: const Icon(Icons.qr_code_2),
                   ),
                 ),
               ),
@@ -132,15 +130,15 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
+                    label: const Text(
                       'Rewards & Referrals',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    icon: Icon(Icons.reviews_sharp),
+                    icon: const Icon(Icons.reviews_sharp),
                   ),
                 ),
               ),
@@ -153,15 +151,15 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
+                    label: const Text(
                       'Settings',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    icon: Icon(Icons.shopping_basket),
+                    icon: const Icon(Icons.shopping_basket),
                   ),
                 ),
               ),
@@ -169,15 +167,15 @@ class MoreScreen extends StatelessWidget {
                 width: 300,
                 height: 80,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 1),
+                  padding: const EdgeInsets.only(top: 1),
                   child: OutlinedButton.icon(
                     onPressed: () {},
-                    label: Text(
+                    label: const Text(
                       'About',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    icon: Icon(Icons.shopping_basket),
+                    icon: const Icon(Icons.shopping_basket),
                   ),
                 ),
               ),

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reality_pos/screens/checkout_screen.dart';
@@ -27,14 +25,14 @@ class CartGrid extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.12,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 47, 48, 60),
+                    backgroundColor: const Color.fromARGB(255, 47, 48, 60),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.zero),
                     ),
                   ),
-                  icon: Icon(Icons.shopping_basket_outlined),
+                  icon: const Icon(Icons.shopping_basket_outlined),
                   onPressed: () {},
-                  label: Text(
+                  label: const Text(
                     'Order',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -49,12 +47,12 @@ class CartGrid extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.zero),
                     ),
                   ),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.delete,
                     size: 30,
                   ),
                   onPressed: cart.clear,
-                  label: Text('CLEAR'),
+                  label: const Text('CLEAR'),
                 ),
               ),
             ],
@@ -66,7 +64,7 @@ class CartGrid extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8.0, left: 18, right: 20),
             child: cart.items.isEmpty
                 ? Container(
-                    color: Color.fromARGB(255, 47, 48, 60),
+                    color: const Color.fromARGB(255, 47, 48, 60),
                     child: Center(
                         child: Image.asset(
                       'assets/images/cart_logo.png',
@@ -93,11 +91,11 @@ class CartGrid extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
             elevation: 4,
-            color: Color.fromARGB(255, 47, 48, 60),
+            color: const Color.fromARGB(255, 47, 48, 60),
             child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.28,
               child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
                     Padding(
@@ -112,7 +110,7 @@ class CartGrid extends StatelessWidget {
                           ),
                           Text(
                             'P ${cart.subTotal.toStringAsFixed(2)}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
@@ -132,7 +130,7 @@ class CartGrid extends StatelessWidget {
                           ),
                           Text(
                             'P ${cart.totalTax.toStringAsFixed(2)}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
@@ -140,7 +138,7 @@ class CartGrid extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       indent: 15,
                       endIndent: 10,
                       color: Colors.white,
@@ -157,7 +155,7 @@ class CartGrid extends StatelessWidget {
                           ),
                           Text(
                             'P ${cart.totalAmount.toStringAsFixed(2)}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
@@ -179,8 +177,8 @@ class CartGrid extends StatelessWidget {
                             ),
                           ),
                         ),
-                        icon: Icon(Icons.print),
-                        label: Text(
+                        icon: const Icon(Icons.print),
+                        label: const Text(
                           'Place Order',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
@@ -200,7 +198,7 @@ class CartGrid extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CheckoutScreen(),
+                              builder: (context) => const CheckoutScreen(),
                             ),
                           );
                         },

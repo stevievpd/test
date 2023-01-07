@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +30,7 @@ class UserProductScreen extends StatelessWidget {
                     UserProductItem(
                       productsData.items[i].title,
                     ),
-                    Divider(),
+                    const Divider(),
                   ],
                 ),
               ),

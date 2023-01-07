@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names, use_key_in_widget_constructors, prefer_const_constructors
-
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -11,10 +9,12 @@ import './products_overview_screen.dart';
 import '../providers/auth.dart';
 import '../widgets/confirm_exit_app.dart';
 
-enum AuthMode { Signup, Login }
+enum AuthMode { signup, login }
 
 class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
+
+  const AuthScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class AuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+                  const Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
+                  const Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -48,9 +48,9 @@ class AuthScreen extends StatelessWidget {
                 children: <Widget>[
                   Flexible(
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20.0),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
+                      margin: const EdgeInsets.only(bottom: 20.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 94.0),
                       transform: Matrix4.rotationZ(-8 * pi / 180)
                         ..translate(-10.0),
                       // ..translate(-10.0),
@@ -78,7 +78,7 @@ class AuthScreen extends StatelessWidget {
                   ),
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
-                    child: AuthCard(),
+                    child: const AuthCard(),
                   ),
                 ],
               ),
@@ -91,15 +91,17 @@ class AuthScreen extends StatelessWidget {
 }
 
 class AuthCard extends StatefulWidget {
+  const AuthCard({super.key});
+
   @override
   State<AuthCard> createState() => _AuthCardState();
 }
 
 class _AuthCardState extends State<AuthCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
-  AuthMode _authMode = AuthMode.Login;
+  AuthMode _authMode = AuthMode.login;
   final Map<String, String> _authData = {
     'email': '',
     'password': '',
@@ -112,7 +114,7 @@ class _AuthCardState extends State<AuthCard> {
       return false;
     }
     _formKey.currentState!.save();
-    if (_authMode == AuthMode.Login) {
+    if (_authMode == AuthMode.login) {
       // Log user in
       final signInStatus =
           await Provider.of<Auth>(context, listen: false).signIn(
@@ -139,13 +141,13 @@ class _AuthCardState extends State<AuthCard> {
   }
 
   void _switchAuthMode() {
-    if (_authMode == AuthMode.Login) {
+    if (_authMode == AuthMode.login) {
       setState(() {
-        _authMode = AuthMode.Signup;
+        _authMode = AuthMode.signup;
       });
     } else {
       setState(() {
-        _authMode = AuthMode.Login;
+        _authMode = AuthMode.login;
       });
     }
   }
@@ -160,18 +162,18 @@ class _AuthCardState extends State<AuthCard> {
         ),
         elevation: 8.0,
         child: Container(
-          height: _authMode == AuthMode.Signup ? 320 : 260,
+          height: _authMode == AuthMode.signup ? 320 : 260,
           constraints: BoxConstraints(
-              minHeight: _authMode == AuthMode.Signup ? 320 : 260),
+              minHeight: _authMode == AuthMode.signup ? 320 : 260),
           width: deviceSize.width * 0.75,
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'E-Mail'),
+                    decoration: const InputDecoration(labelText: 'E-Mail'),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
@@ -184,7 +186,7 @@ class _AuthCardState extends State<AuthCard> {
                     },
                   ),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: const InputDecoration(labelText: 'Password'),
                     obscureText: true,
                     controller: _passwordController,
                     autofocus: false,
@@ -192,13 +194,13 @@ class _AuthCardState extends State<AuthCard> {
                       _authData['password'] = value.toString();
                     },
                   ),
-                  if (_authMode == AuthMode.Signup)
+                  if (_authMode == AuthMode.signup)
                     TextFormField(
-                      enabled: _authMode == AuthMode.Signup,
+                      enabled: _authMode == AuthMode.signup,
                       decoration:
-                          InputDecoration(labelText: 'Confirm Password'),
+                          const InputDecoration(labelText: 'Confirm Password'),
                       obscureText: true,
-                      validator: _authMode == AuthMode.Signup
+                      validator: _authMode == AuthMode.signup
                           ? (value) {
                               if (value != _passwordController.text) {
                                 throw HttpException("Passwords do not match!");
@@ -207,7 +209,7 @@ class _AuthCardState extends State<AuthCard> {
                             }
                           : null,
                     ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
@@ -215,8 +217,8 @@ class _AuthCardState extends State<AuthCard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 8),
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor:
                           Theme.of(context).primaryTextTheme.button!.color,
@@ -225,11 +227,11 @@ class _AuthCardState extends State<AuthCard> {
                       try {
                         final status = await _submit();
                         if (status) {
-                          if (_authMode == AuthMode.Login) {
+                          if (_authMode == AuthMode.login) {
                             if (!mounted) return;
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (_) => ProductsOverviewScreen(),
+                                builder: (_) => const ProductsOverviewScreen(),
                               ),
                             );
                           }
@@ -245,18 +247,18 @@ class _AuthCardState extends State<AuthCard> {
                       }
                     },
                     child:
-                        Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
+                        Text(_authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP'),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 4),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       foregroundColor: Theme.of(context).primaryColor,
                     ),
                     onPressed: _switchAuthMode,
                     child: Text(
-                        '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
+                        '${_authMode == AuthMode.login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
                   ),
                 ],
               ),
@@ -273,11 +275,11 @@ Future<void> _showDialog1(BuildContext context, error) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Login failed'),
+        title: const Text('Login failed'),
         content: Text(error),
         actions: [
           TextButton(
-            child: Text('Ok'),
+            child: const Text('Ok'),
             onPressed: () {
               Navigator.of(context).pop();
             },

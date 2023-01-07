@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +29,7 @@ class _ProductsGridState extends State<ProductsGrid> {
     final productList = Provider.of<Products>(context);
     return productList.productList.isEmpty
         ? Container(
-            color: Color.fromARGB(255, 47, 48, 60),
+            color: const Color.fromARGB(255, 47, 48, 60),
             child: Center(
               child: Image.asset(
                 'assets/images/category_logo.png',
@@ -45,7 +43,7 @@ class _ProductsGridState extends State<ProductsGrid> {
             itemBuilder: (ctx, i) => ProductItem(
               productList.productList[i],
             ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: 1,
             ),
