@@ -23,6 +23,28 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.dispose();
   }
 
+  void checkOut(cart, double? amountPayment) async {
+    try {
+      var cashPayment = amountPayment!.toDouble();
+      var cashChange = cashPayment - cart.totalAmount;
+      final result =
+          await Provider.of<Orders>(context, listen: false).addOrders(
+        cart.items.values.toList(),
+        cart.totalAmount,
+        cashPayment,
+        cashChange,
+      );
+      if (!mounted) {
+        return;
+      }
+      if (result) {
+        Navigator.of(context).pop();
+      }
+    } catch (error) {
+      errorDialog.showDialog1(context, error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
@@ -78,90 +100,31 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ElevatedButton(
-                          onPressed: cart.totalAmount <= 0
-                              ? null
-                              : () async {
-                                  var cashPayment = 50.toDouble();
-                                  var cashChange =
-                                      cashPayment - cart.totalAmount;
-                                  await Provider.of<Orders>(context,
-                                          listen: false)
-                                      .addOrders(
-                                    cart.items.values.toList(),
-                                    cart.totalAmount,
-                                    cashPayment,
-                                    cashChange,
-                                  );
-                                  cart.clear();
-                                },
+                          onPressed: () {
+                            checkOut(cart, 50);
+                            cart.clear();
+                          },
                           child: Text("50", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
-                          onPressed: cart.totalAmount <= 0
-                              ? null
-                              : () async {
-                                  var cashPayment = 100.toDouble();
-                                  var cashChange =
-                                      cashPayment - cart.totalAmount;
-                                  await Provider.of<Orders>(context,
-                                          listen: false)
-                                      .addOrders(
-                                    cart.items.values.toList(),
-                                    cart.totalAmount,
-                                    cashPayment,
-                                    cashChange,
-                                  );
-                                  cart.clear();
-                                },
+                          onPressed: () {
+                            checkOut(cart, 100);
+                            cart.clear();
+                          },
                           child: Text("100", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
-                          onPressed: cart.totalAmount <= 0
-                              ? null
-                              : () async {
-                                  var cashPayment = 500.toDouble();
-                                  var cashChange =
-                                      cashPayment - cart.totalAmount;
-                                  await Provider.of<Orders>(context,
-                                          listen: false)
-                                      .addOrders(
-                                    cart.items.values.toList(),
-                                    cart.totalAmount,
-                                    cashPayment,
-                                    cashChange,
-                                  );
-                                  cart.clear();
-                                },
+                          onPressed: () {
+                            checkOut(cart, 500);
+                            cart.clear();
+                          },
                           child: Text("500", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
-                          onPressed: cart.totalAmount <= 0
-                              ? null
-                              : () async {
-                                  try {
-                                    var cashPayment = 1000.toDouble();
-                                    var cashChange =
-                                        cashPayment - cart.totalAmount;
-                                    final result = await Provider.of<Orders>(
-                                            context,
-                                            listen: false)
-                                        .addOrders(
-                                      cart.items.values.toList(),
-                                      cart.totalAmount,
-                                      cashPayment,
-                                      cashChange,
-                                    );
-                                    cart.clear();
-                                    if (!mounted) {
-                                      return;
-                                    }
-                                    if (result) {
-                                      Navigator.of(context).pop();
-                                    }
-                                  } catch (error) {
-                                    errorDialog.showDialog1(context, error);
-                                  }
-                                },
+                          onPressed: () {
+                            checkOut(cart, 1000);
+                            cart.clear();
+                          },
                           child: Text("1000", style: textTheme.labelMedium),
                         ),
                       ],
@@ -182,35 +145,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         Expanded(
                             flex: 1,
                             child: TextButton(
-                              onPressed: cart.totalAmount <= 0
-                                  ? null
-                                  : () async {
-                                      try {
-                                        var cashPayment = double.parse(
-                                            cashPaymentController.text);
-                                        var cashChange =
-                                            cashPayment - cart.totalAmount;
-                                        final result =
-                                            await Provider.of<Orders>(context,
-                                                    listen: false)
-                                                .addOrders(
-                                          cart.items.values.toList(),
-                                          cart.totalAmount,
-                                          cashPayment,
-                                          cashChange,
-                                        );
-                                        cart.clear();
-                                        if (!mounted) {
-                                          return;
-                                        }
-                                        if (result) {
-                                          Navigator.of(context).pop();
-                                        }
-                                      } catch (error) {
-                                        errorDialog.showDialog1(
-                                            context, error.toString());
-                                      }
-                                    },
+                              onPressed: () {
+                                checkOut(
+                                  cart,
+                                  double.parse(cashPaymentController.text),
+                                );
+                                cart.clear();
+                              },
                               child: const Text("CHARGE"),
                             )),
                       ],
