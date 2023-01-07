@@ -17,6 +17,7 @@ class _ProductsGridState extends State<ProductsGrid> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
+      Provider.of<Products>(context).clearProducts();
       Provider.of<Products>(context).fetchProducts();
     }
     _isInit = false;
@@ -39,9 +40,8 @@ class _ProductsGridState extends State<ProductsGrid> {
         : GridView.builder(
             padding: const EdgeInsets.all(10),
             itemCount: productList.productList.length,
-            itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-              value: productList.productList[i],
-              child: ProductItem(),
+            itemBuilder: (ctx, i) => ProductItem(
+              productData: productList.productList[i],
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,

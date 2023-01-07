@@ -59,7 +59,6 @@ class Products with ChangeNotifier {
   }
 
   void clearProducts() {
-    productList.clear();
-    notifyListeners();
+    productList = [];
   }
 }
