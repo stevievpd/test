@@ -5,6 +5,8 @@ import '../providers/category.dart';
 import './category_item.dart';
 
 class CategoryGrid extends StatefulWidget {
+  const CategoryGrid({super.key});
+
   @override
   State<CategoryGrid> createState() => _CategoryGridState();
 }
@@ -31,7 +33,7 @@ class _CategoryGridState extends State<CategoryGrid> {
       itemCount: category.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
         value: category[i],
-        child: SizedBox(
+        child: const SizedBox(
           width: 225,
           child: CategoryItem(),
         ),

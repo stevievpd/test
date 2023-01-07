@@ -7,6 +7,8 @@ import '../providers/products.dart';
 import './product_item.dart';
 
 class ProductsGrid extends StatefulWidget {
+  const ProductsGrid({super.key});
+
   @override
   State<ProductsGrid> createState() => _ProductsGridState();
 }
@@ -27,7 +29,7 @@ class _ProductsGridState extends State<ProductsGrid> {
   @override
   Widget build(BuildContext context) {
     final productList = Provider.of<Products>(context);
-    return productList.productList.length < 1
+    return productList.productList.isEmpty
         ? Container(
             color: Color.fromARGB(255, 47, 48, 60),
             child: Center(
@@ -41,7 +43,7 @@ class _ProductsGridState extends State<ProductsGrid> {
             padding: const EdgeInsets.all(10),
             itemCount: productList.productList.length,
             itemBuilder: (ctx, i) => ProductItem(
-              productData: productList.productList[i],
+              productList.productList[i],
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,

@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 class UserProductItem extends StatelessWidget {
   final String title;
 
-  UserProductItem(this.title);
+  const UserProductItem(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(title),
-      trailing: Container(
+      trailing: SizedBox(
         width: 100,
         child: Row(
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
               onPressed: () {},
               color: Theme.of(context).primaryColor,
             ),
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               onPressed: () {},
               color: Theme.of(context).errorColor,
             ),

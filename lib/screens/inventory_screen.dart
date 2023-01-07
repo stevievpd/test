@@ -1,13 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../providers/product.dart';
-
 class InventoryScreen extends StatefulWidget {
+  const InventoryScreen({super.key});
+
   @override
   State<InventoryScreen> createState() => _InventoryScreenState();
 }
@@ -28,7 +25,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
+        SizedBox(
           height: double.infinity,
           width: MediaQuery.of(context).size.width * 0.40,
           child: Column(
@@ -44,31 +41,35 @@ class _InventoryScreenState extends State<InventoryScreen> {
                       StackedAreaSeries<ExpenseData, String>(
                           dataSource: _chartData,
                           xValueMapper: (ExpenseData exp, _) =>
-                              exp.ExpenseCategory,
+                              exp.expenseCategory,
                           yValueMapper: (ExpenseData exp, _) => exp.father,
                           name: 'VIP Milk Tea',
-                          markerSettings: MarkerSettings(isVisible: true)),
+                          markerSettings:
+                              const MarkerSettings(isVisible: true)),
                       StackedAreaSeries<ExpenseData, String>(
                           dataSource: _chartData,
                           xValueMapper: (ExpenseData exp, _) =>
-                              exp.ExpenseCategory,
+                              exp.expenseCategory,
                           yValueMapper: (ExpenseData exp, _) => exp.mother,
                           name: 'Burger Ahoy',
-                          markerSettings: MarkerSettings(isVisible: true)),
+                          markerSettings:
+                              const MarkerSettings(isVisible: true)),
                       StackedAreaSeries<ExpenseData, String>(
                           dataSource: _chartData,
                           xValueMapper: (ExpenseData exp, _) =>
-                              exp.ExpenseCategory,
+                              exp.expenseCategory,
                           yValueMapper: (ExpenseData exp, _) => exp.son,
                           name: 'Red Meat',
-                          markerSettings: MarkerSettings(isVisible: true)),
+                          markerSettings:
+                              const MarkerSettings(isVisible: true)),
                       StackedAreaSeries<ExpenseData, String>(
                           dataSource: _chartData,
                           xValueMapper: (ExpenseData exp, _) =>
-                              exp.ExpenseCategory,
+                              exp.expenseCategory,
                           yValueMapper: (ExpenseData exp, _) => exp.daughter,
                           name: 'Angs Pares',
-                          markerSettings: MarkerSettings(isVisible: true)),
+                          markerSettings:
+                              const MarkerSettings(isVisible: true)),
                     ],
                     primaryXAxis: CategoryAxis(),
                   ),
@@ -78,7 +79,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
           ),
         ),
         Card(
-          child: Container(
+          child: SizedBox(
             height: double.infinity,
             width: MediaQuery.of(context).size.width * 0.59,
             child: Padding(
@@ -91,15 +92,15 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 columns: [
                   DataColumn(
                     onSort: (i, b) {},
-                    label: Text('Product Name'),
+                    label: const Text('Product Name'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Product Description'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Quantity'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Price'),
                   ),
                 ],
@@ -136,12 +137,12 @@ List<ExpenseData> getchartData() {
 }
 
 class ExpenseData {
-  final String ExpenseCategory;
+  final String expenseCategory;
   final num father;
   final num mother;
   final num son;
   final num daughter;
 
   ExpenseData(
-      this.ExpenseCategory, this.father, this.mother, this.son, this.daughter);
+      this.expenseCategory, this.father, this.mother, this.son, this.daughter);
 }

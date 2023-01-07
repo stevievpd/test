@@ -17,11 +17,13 @@ import './widgets/cart_grid.dart';
 
 Future<void> main() async {
   await dotenv.load();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final storage = const FlutterSecureStorage();
+
+  const MyApp({super.key});
 
   Future<String> get jwtOrEmpty async {
     var jwt = await storage.read(key: "token");
@@ -71,7 +73,7 @@ class MyApp extends StatelessWidget {
               var jwtToken = snapshot.data;
               var isExpired = Jwt.isExpired(jwtToken.toString());
               if (isExpired == false) {
-                return ProductsOverviewScreen();
+                return const ProductsOverviewScreen();
               } else {
                 return AuthScreen();
               }
@@ -81,8 +83,8 @@ class MyApp extends StatelessWidget {
           }),
         ),
         routes: {
-          CartGrid.routeName: (ctx) => CartGrid(),
-          OrdersScreen.routeName: (ctx) => OrdersScreen(),
+          CartGrid.routeName: (ctx) => const CartGrid(),
+          OrdersScreen.routeName: (ctx) => const OrdersScreen(),
           AuthScreen.routeName: (ctx) => AuthScreen(),
         },
       ),

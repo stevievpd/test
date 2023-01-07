@@ -1,7 +1,3 @@
-// ignore_for_file: sort_child_properties_last, prefer_const_constructors
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,13 +10,8 @@ class CartItem extends StatelessWidget {
   final int quantity;
   final String title;
 
-  CartItem(
-    this.id,
-    this.productId,
-    this.price,
-    this.quantity,
-    this.title,
-  );
+  const CartItem(this.id, this.productId, this.price, this.quantity, this.title,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +20,16 @@ class CartItem extends StatelessWidget {
         key: ValueKey(id),
         background: Container(
           color: Theme.of(context).errorColor,
-          child: Icon(
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 10),
+          margin: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 4,
+          ),
+          child: const Icon(
             Icons.delete,
             color: Colors.white,
             size: 40,
-          ),
-          alignment: Alignment.centerRight,
-          padding: EdgeInsets.only(right: 10),
-          margin: EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 4,
           ),
         ),
         direction: DismissDirection.endToStart,
@@ -46,20 +37,21 @@ class CartItem extends StatelessWidget {
           return showDialog(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: Text('Are you sure?'),
-              content: Text('Do you want to remove the item from the cart?'),
+              title: const Text('Are you sure?'),
+              content:
+                  const Text('Do you want to remove the item from the cart?'),
               actions: [
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   },
-                  child: Text('No'),
+                  child: const Text('No'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(true);
                   },
-                  child: Text('Yes'),
+                  child: const Text('Yes'),
                 ),
               ],
             ),
@@ -73,38 +65,38 @@ class CartItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
           elevation: 4,
-          color: Color.fromARGB(255, 47, 48, 60),
-          margin: EdgeInsets.symmetric(
+          color: const Color.fromARGB(255, 47, 48, 60),
+          margin: const EdgeInsets.symmetric(
             horizontal: 1,
             vertical: 4,
           ),
           child: Padding(
-            padding: EdgeInsets.all(1),
+            padding: const EdgeInsets.all(1),
             child: ListTile(
               leading: CircleAvatar(
                 maxRadius: 15,
                 child: Padding(
-                  padding: EdgeInsets.all(2),
+                  padding: const EdgeInsets.all(2),
                   child: FittedBox(
                     child: Text(
                       productId,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
               ),
               title: Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              subtitle:
-                  Text('Total: P$price', style: TextStyle(color: Colors.grey)),
+              subtitle: Text('Total: P$price',
+                  style: const TextStyle(color: Colors.grey)),
               trailing: Text(
                 '$quantity x',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
                   fontWeight: FontWeight.bold,

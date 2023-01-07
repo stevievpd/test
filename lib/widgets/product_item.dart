@@ -1,15 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/product.dart';
 import '../providers/cart.dart';
 import '../providers/scroll_controller.dart';
 
 class ProductItem extends StatelessWidget {
-  var productData;
-  ProductItem({required this.productData});
+  final dynamic productData;
+  const ProductItem(this.productData, {super.key});
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context, listen: false);
@@ -23,7 +20,7 @@ class ProductItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
             elevation: 10,
-            color: Color.fromARGB(255, 47, 48, 60),
+            color: const Color.fromARGB(255, 47, 48, 60),
             child: InkWell(
               onTap: () {
                 cart.addItem(
@@ -32,8 +29,8 @@ class ProductItem extends StatelessWidget {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    duration: Duration(milliseconds: 5),
-                    content: Text("Added to cart!"),
+                    duration: const Duration(milliseconds: 5),
+                    content: const Text("Added to cart!"),
                     action: SnackBarAction(
                       label: 'UNDO',
                       onPressed: () {
@@ -51,7 +48,7 @@ class ProductItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
+                      SizedBox(
                           height: 120,
                           width: 180,
                           child: ClipRRect(
@@ -63,11 +60,12 @@ class ProductItem extends StatelessWidget {
                           )),
                       Text(
                         productData.title,
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       Text(
                         'P ${productData.price}'.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.deepOrange,
                           fontSize: 20,

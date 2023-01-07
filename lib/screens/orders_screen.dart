@@ -7,17 +7,18 @@ import 'package:provider/provider.dart';
 
 import '../providers/orders.dart' show Orders;
 import '../widgets/order_item.dart';
-import '../widgets/app_drawer.dart';
 
 class OrdersScreen extends StatefulWidget {
   static const routeName = '/orders';
+
+  const OrdersScreen({super.key});
 
   @override
   State<OrdersScreen> createState() => _OrdersScreenState();
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  TextEditingController _date = TextEditingController();
+  final TextEditingController _date = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final orderData = Provider.of<Orders>(context);

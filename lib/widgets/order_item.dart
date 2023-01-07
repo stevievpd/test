@@ -10,10 +10,10 @@ import '../providers/orders.dart' as ord;
 class OrderItem extends StatefulWidget {
   final ord.OrderItem order;
 
-  OrderItem(this.order);
+  const OrderItem(this.order, {super.key});
 
   @override
-  _OrderItemState createState() => _OrderItemState();
+  State<OrderItem> createState() => _OrderItemState();
 }
 
 class _OrderItemState extends State<OrderItem> {
@@ -27,7 +27,7 @@ class _OrderItemState extends State<OrderItem> {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: Text('\P ${widget.order.amount}'),
+            title: Text('P ${widget.order.amount}'),
             subtitle: Text(
               DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
             ),
@@ -59,7 +59,7 @@ class _OrderItemState extends State<OrderItem> {
                             ),
                           ),
                           Text(
-                            '${prod.quantity}x \P ${prod.price}',
+                            '${prod.quantity}x P ${prod.price}',
                             style: TextStyle(
                               fontSize: 18,
                               color: Colors.grey,

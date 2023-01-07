@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reality_pos/providers/scroll_controller.dart';
-import 'package:reality_pos/widgets/cart_grid.dart';
-import 'package:reality_pos/widgets/cart_item.dart';
 
+import 'package:reality_pos/providers/scroll_controller.dart';
+import 'package:reality_pos/widgets/cart_item.dart';
 import '../providers/cart.dart' show Cart;
 
 class Ticket extends StatelessWidget {

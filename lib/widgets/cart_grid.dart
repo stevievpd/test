@@ -64,7 +64,7 @@ class CartGrid extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.45,
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0, left: 18, right: 20),
-            child: cart.items.length < 1
+            child: cart.items.isEmpty
                 ? Container(
                     color: Color.fromARGB(255, 47, 48, 60),
                     child: Center(
@@ -111,7 +111,7 @@ class CartGrid extends StatelessWidget {
                             style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                           Text(
-                            '\P ${cart.subTotal.toStringAsFixed(2)}',
+                            'P ${cart.subTotal.toStringAsFixed(2)}',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -131,7 +131,7 @@ class CartGrid extends StatelessWidget {
                             style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                           Text(
-                            '\P ${cart.totalTax.toStringAsFixed(2)}',
+                            'P ${cart.totalTax.toStringAsFixed(2)}',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -156,7 +156,7 @@ class CartGrid extends StatelessWidget {
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                           Text(
-                            '\P ${cart.totalAmount.toStringAsFixed(2)}',
+                            'P ${cart.totalAmount.toStringAsFixed(2)}',
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,

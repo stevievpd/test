@@ -1,19 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:reality_pos/providers/cart.dart';
-import 'package:reality_pos/providers/category.dart';
-import 'package:reality_pos/screens/auth_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/cart.dart';
+import '../providers/category.dart';
+import '../screens/auth_screen.dart';
 import '../screens/orders_screen.dart';
-import '../providers/auth.dart';
 import '../providers/products.dart';
 
 class AppDrawer extends StatelessWidget {
-  final storage = FlutterSecureStorage();
-  String? test;
+  final storage = const FlutterSecureStorage();
+
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
