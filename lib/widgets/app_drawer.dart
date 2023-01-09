@@ -16,6 +16,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -28,7 +29,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.shop),
             title: const Text('Shop'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/');
+              navigator.pushReplacementNamed('/');
             },
           ),
           const Divider(),
@@ -36,8 +37,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.payment),
             title: const Text('Orders'),
             onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(OrdersScreen.routeName);
+              navigator.pushReplacementNamed(OrdersScreen.routeName);
             },
           ),
           const Divider(),
@@ -49,7 +49,7 @@ class AppDrawer extends StatelessWidget {
                   .clearCategories;
               Provider.of<Products>(context, listen: false).clearProducts;
               await storage.delete(key: "token");
-              Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
+              navigator.pushReplacementNamed(AuthScreen.routeName);
             },
           ),
           const Divider(),

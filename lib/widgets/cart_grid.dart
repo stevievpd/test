@@ -4,10 +4,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reality_pos/screens/checkout_screen.dart';
 
 import '../providers/cart.dart' show Cart;
 import 'cart_item.dart';
-import '../providers/orders.dart';
 import '../providers/scroll_controller.dart';
 
 class CartGrid extends StatelessWidget {
@@ -185,16 +185,25 @@ class CartGrid extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
-                        onPressed: cart.totalAmount <= 0
-                            ? null
-                            : () {
-                                Provider.of<Orders>(context, listen: false)
-                                    .addOrders(
-                                  cart.items.values.toList(),
-                                  cart.totalAmount,
-                                );
-                                cart.clear();
-                              },
+                        // onPressed: cart.totalAmount <= 0
+                        //     ? null
+                        //     : () async {
+                        //         await Provider.of<Orders>(context,
+                        //                 listen: false)
+                        //             .addOrders(
+                        //           cart.items.values.toList(),
+                        //           cart.totalAmount,
+                        //         );
+                        //         cart.clear();
+                        //       },
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CheckoutScreen(),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

@@ -67,7 +67,7 @@ class CategoriesItem with ChangeNotifier {
   }
 
   clearCategories() {
-    List<Categories> _categoryList = [];
+    _categoryList = [];
     notifyListeners();
   }
 }

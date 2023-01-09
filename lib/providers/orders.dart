@@ -59,7 +59,6 @@ class Orders with ChangeNotifier {
 
   Future<void> addOrders(List<CartItem> cartProducts, double total) async {
     final token = await storage.read(key: "token");
-    log(token.toString());
     final url = Uri.parse("http://${dotenv.env['apiUrl']}/order/add-order");
     final timestamp = DateTime.now();
     try {
@@ -84,15 +83,15 @@ class Orders with ChangeNotifier {
           "storeId": 1,
         }),
       );
-      _orders.insert(
-        0,
-        OrderItem(
-          id: json.decode(response.body)['name'],
-          amount: total,
-          dateTime: timestamp,
-          products: cartProducts,
-        ),
-      );
+      // _orders.insert(
+      //   0,
+      //   OrderItem(
+      //     id: json.decode(response.body)['name'],
+      //     amount: total,
+      //     dateTime: timestamp,
+      //     products: cartProducts,
+      //   ),
+      // );
     } catch (err) {
       rethrow;
     }
