@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'category.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './product.dart';
@@ -58,8 +57,7 @@ class Products with ChangeNotifier {
     }
   }
 
-  clearProducts() {
-    _items = [];
-    notifyListeners();
+  void clearProducts() {
+    productList = [];
   }
 }

@@ -3,15 +3,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:developer';
-import 'package:jwt_decode/jwt_decode.dart';
+
 import '../model/http_exception.dart';
 
 class Auth with ChangeNotifier {
   late String _token;
-  late DateTime _tokenExpiry;
   late String userId;
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   dynamic decodedJson;
 

@@ -16,16 +16,16 @@ class ProductsOverviewScreen extends StatefulWidget {
   const ProductsOverviewScreen({super.key});
 
   @override
-  _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
 }
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    MenuScreen(),
-    OrdersScreen(),
-    InventoryScreen(),
+    const MenuScreen(),
+    const OrdersScreen(),
+    const InventoryScreen(),
     const MoreScreen(),
   ];
 
@@ -44,7 +44,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           title: const Text('My Shop'),
           backgroundColor: const Color(0xff1f2029),
         ),
-        drawer: AppDrawer(),
+        drawer: const AppDrawer(),
         body: SafeArea(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
@@ -80,6 +80,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 }
 
 class MenuScreen extends StatelessWidget {
+  const MenuScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
@@ -93,12 +95,12 @@ class MenuScreen extends StatelessWidget {
               width: screenSize.width * 0.75,
               height: screenSize.height * 0.16,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: const Color(0xff1f2029)),
+                decoration: const BoxDecoration(color: Color(0xff1f2029)),
                 child: Padding(
                   padding: const EdgeInsets.all(30),
                   child: RefreshIndicator(
                       onRefresh: categoryData.fetchCategories,
-                      child: CategoryGrid()),
+                      child: const CategoryGrid()),
                 ),
               ),
             ),
@@ -106,13 +108,13 @@ class MenuScreen extends StatelessWidget {
               width: screenSize.width * 0.75,
               height: screenSize.height * 0.639,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: const Color(0xff1f2029)),
+                decoration: const BoxDecoration(color: Color(0xff1f2029)),
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 25.0, right: 25, top: 10),
                   child: RefreshIndicator(
                       onRefresh: productData.fetchProducts,
-                      child: ProductsGrid()),
+                      child: const ProductsGrid()),
                 ),
               ),
             ),
@@ -121,8 +123,8 @@ class MenuScreen extends StatelessWidget {
         SizedBox(
           width: screenSize.width * 0.25,
           height: screenSize.height,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: const Color(0xff1f2029)),
+          child: const DecoratedBox(
+            decoration: BoxDecoration(color: Color(0xff1f2029)),
             child: CartGrid(),
           ),
         ),

@@ -1,11 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reality_pos/providers/scroll_controller.dart';
-import 'package:reality_pos/widgets/cart_grid.dart';
-import 'package:reality_pos/widgets/cart_item.dart';
 
+import 'package:reality_pos/providers/scroll_controller.dart';
+import 'package:reality_pos/widgets/cart_item.dart';
 import '../providers/cart.dart' show Cart;
 
 class Ticket extends StatelessWidget {
@@ -49,7 +46,7 @@ class Ticket extends StatelessWidget {
                 ),
                 Text(
                   'P ${cart.subTotal.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
@@ -68,7 +65,7 @@ class Ticket extends StatelessWidget {
                 ),
                 Text(
                   'P ${cart.totalTax.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
@@ -87,7 +84,7 @@ class Ticket extends StatelessWidget {
                 ),
                 Text(
                   'P ${cart.totalAmount.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),

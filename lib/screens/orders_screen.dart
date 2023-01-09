@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -7,17 +5,18 @@ import 'package:provider/provider.dart';
 
 import '../providers/orders.dart' show Orders;
 import '../widgets/order_item.dart';
-import '../widgets/app_drawer.dart';
 
 class OrdersScreen extends StatefulWidget {
   static const routeName = '/orders';
+
+  const OrdersScreen({super.key});
 
   @override
   State<OrdersScreen> createState() => _OrdersScreenState();
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  TextEditingController _date = TextEditingController();
+  final TextEditingController _date = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final orderData = Provider.of<Orders>(context);
@@ -34,7 +33,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     width: MediaQuery.of(context).size.width * 0.2,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Text('ONLINE'),
+                      child: const Text('ONLINE'),
                     ),
                   ),
                   SizedBox(
@@ -42,7 +41,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     width: MediaQuery.of(context).size.width * 0.2,
                     child: OutlinedButton(
                       onPressed: () {},
-                      child: Text('OFFLINE'),
+                      child: const Text('OFFLINE'),
                     ),
                   ),
                 ],
@@ -105,15 +104,15 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 columns: [
                   DataColumn(
                     onSort: (i, b) {},
-                    label: Text('Order ID'),
+                    label: const Text('Order ID'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Date'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Sale'),
                   ),
-                  DataColumn(
+                  const DataColumn(
                     label: Text('Items'),
                   ),
                 ],

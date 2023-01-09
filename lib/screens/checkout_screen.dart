@@ -1,17 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
+import '../widgets/error/dialog_error.dart';
 import '../providers/cart.dart';
+import '../providers/orders.dart';
 import '../widgets/ticket.dart';
 
-class CheckoutScreen extends StatelessWidget {
-  CheckoutScreen({super.key});
+class CheckoutScreen extends StatefulWidget {
+  const CheckoutScreen({super.key});
+
+  @override
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
+  final cashPaymentController = TextEditingController();
+  final errorDialog = ErrorDialog();
+
+  @override
+  void dispose() {
+    cashPaymentController.dispose();
+    super.dispose();
+  }
+
+  void checkOut(cart, double? amountPayment) async {
+    try {
+      var cashPayment = amountPayment!.toDouble();
+      var cashChange = cashPayment - cart.totalAmount;
+      final result =
+          await Provider.of<Orders>(context, listen: false).addOrders(
+        cart.items.values.toList(),
+        cart.totalAmount,
+        cashPayment,
+        cashChange,
+      );
+      if (!mounted) {
+        return;
+      }
+      if (result) {
+        Navigator.of(context).pop();
+      }
+    } catch (error) {
+      errorDialog.showDialog1(context, error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
-    final screenSize = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -34,12 +70,14 @@ class CheckoutScreen extends StatelessWidget {
               ],
             ),
             body: const SingleChildScrollView(child: Ticket()),
+            floatingActionButton: null,
           ),
         ),
         Expanded(
           flex: 2,
           child: Scaffold(
             appBar: AppBar(),
+            floatingActionButton: null,
             body: SizedBox(
               width: double.infinity,
               height: double.infinity,
@@ -62,19 +100,31 @@ class CheckoutScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            checkOut(cart, 50);
+                            cart.clear();
+                          },
                           child: Text("50", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            checkOut(cart, 100);
+                            cart.clear();
+                          },
                           child: Text("100", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            checkOut(cart, 500);
+                            cart.clear();
+                          },
                           child: Text("500", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            checkOut(cart, 1000);
+                            cart.clear();
+                          },
                           child: Text("1000", style: textTheme.labelMedium),
                         ),
                       ],
@@ -85,11 +135,23 @@ class CheckoutScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         const Expanded(flex: 1, child: Icon(Icons.money)),
-                        const Expanded(flex: 3, child: TextField()),
+                        Expanded(
+                          flex: 3,
+                          child: TextField(
+                            controller: cashPaymentController,
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
                         Expanded(
                             flex: 1,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                checkOut(
+                                  cart,
+                                  double.parse(cashPaymentController.text),
+                                );
+                                cart.clear();
+                              },
                               child: const Text("CHARGE"),
                             )),
                       ],

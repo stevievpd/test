@@ -1,14 +1,13 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/products.dart';
 import '../widgets/user_product_item.dart';
-import '../widgets/app_drawer.dart';
 
 class UserProductScreen extends StatelessWidget {
   static const routeName = '/user-products';
+
+  const UserProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class UserProductScreen extends StatelessWidget {
                     UserProductItem(
                       productsData.items[i].title,
                     ),
-                    Divider(),
+                    const Divider(),
                   ],
                 ),
               ),
