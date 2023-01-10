@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../providers/cart.dart';
 import '../providers/category.dart';
-import '../screens/auth_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/products.dart';
+import '../screens/auth_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   final storage = const FlutterSecureStorage();
@@ -51,6 +51,14 @@ class AppDrawer extends StatelessWidget {
               Provider.of<Products>(context, listen: false).clearProducts;
               Provider.of<Cart>(context, listen: false).clear();
               await storage.delete(key: "token");
+              navigator.pushReplacementNamed(AuthScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.payment),
+            title: const Text('Authscreen'),
+            onTap: () {
               navigator.pushReplacementNamed(AuthScreen.routeName);
             },
           ),
