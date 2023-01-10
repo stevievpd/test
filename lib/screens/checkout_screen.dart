@@ -104,29 +104,33 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       children: <Widget>[
                         ElevatedButton(
                           onPressed: () {
-                            checkOut(cart, 50);
-                            cart.clear();
+                            setState(() {
+                              cashPaymentController.text = 50.toString();
+                            });
                           },
                           child: Text("50", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            checkOut(cart, 100);
-                            cart.clear();
+                            setState(() {
+                              cashPaymentController.text = 100.toString();
+                            });
                           },
                           child: Text("100", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            checkOut(cart, 500);
-                            cart.clear();
+                            setState(() {
+                              cashPaymentController.text = 500.toString();
+                            });
                           },
                           child: Text("500", style: textTheme.labelMedium),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            checkOut(cart, 1000);
-                            cart.clear();
+                            setState(() {
+                              cashPaymentController.text = 1000.toString();
+                            });
                           },
                           child: Text("1000", style: textTheme.labelMedium),
                         ),
