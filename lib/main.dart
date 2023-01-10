@@ -60,7 +60,8 @@ class MyApp extends StatelessWidget {
           primaryColor: const Color(0xff1f2029),
           textTheme: const TextTheme(
             bodyLarge: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-            labelMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            labelMedium: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
             displayMedium: TextStyle(fontFamily: "Anton"),
             headlineSmall: TextStyle(fontFamily: "Anton"),
           ),
