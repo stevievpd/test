@@ -55,14 +55,6 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
-          ListTile(
-            leading: const Icon(Icons.payment),
-            title: const Text('Authscreen'),
-            onTap: () {
-              navigator.pushReplacementNamed(AuthScreen.routeName);
-            },
-          ),
-          const Divider(),
         ],
       ),
     );
