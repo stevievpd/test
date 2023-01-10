@@ -15,10 +15,10 @@ class _ProductsGridState extends State<ProductsGrid> {
   var _isInit = true;
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     if (_isInit) {
       Provider.of<Products>(context).clearProducts();
-      Provider.of<Products>(context).fetchProducts();
+      await Provider.of<Products>(context).fetchProducts();
     }
     _isInit = false;
     super.didChangeDependencies();

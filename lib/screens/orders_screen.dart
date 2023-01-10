@@ -26,29 +26,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('ONLINE'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: const Text('OFFLINE'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.4,

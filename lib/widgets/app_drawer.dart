@@ -17,9 +17,11 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final navigator = Navigator.of(context);
     return Drawer(
+      backgroundColor: const Color.fromARGB(255, 234, 236, 255),
       child: Column(
         children: <Widget>[
           AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             title: const Text('Hello Friend!'),
             automaticallyImplyLeading: false,
           ),

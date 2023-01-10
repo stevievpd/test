@@ -57,13 +57,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'MyShop',
         theme: ThemeData(
+          primaryColor: const Color(0xff1f2029),
           textTheme: const TextTheme(
             bodyLarge: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             labelMedium: TextStyle(fontSize: 20),
           ),
           fontFamily: 'Lato',
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-              .copyWith(secondary: Colors.deepOrange),
         ),
         home: FutureBuilder(
           future: jwtOrEmpty,

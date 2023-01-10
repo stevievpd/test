@@ -57,6 +57,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           flex: 1,
           child: Scaffold(
             appBar: AppBar(
+              backgroundColor: Theme.of(context).primaryColor,
               title: const Text(
                 "Ticket",
                 style: TextStyle(fontSize: 20),
@@ -76,7 +77,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         Expanded(
           flex: 2,
           child: Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
             floatingActionButton: null,
             body: SizedBox(
               width: double.infinity,
