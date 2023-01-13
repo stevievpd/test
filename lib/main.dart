@@ -59,9 +59,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: const Color(0xff1f2029),
           textTheme: const TextTheme(
+            titleLarge: TextStyle(fontWeight: FontWeight.bold),
             bodyLarge: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             labelMedium: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+            labelLarge: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
             displayMedium: TextStyle(fontFamily: "Anton"),
             headlineSmall: TextStyle(fontFamily: "Anton"),
           ),
@@ -88,6 +91,8 @@ class MyApp extends StatelessWidget {
           CartGrid.routeName: (ctx) => const CartGrid(),
           OrdersScreen.routeName: (ctx) => const OrdersScreen(),
           AuthScreen.routeName: (ctx) => const AuthScreen(),
+          ProductsOverviewScreen.routeName: (ctx) =>
+              const ProductsOverviewScreen(),
         },
       ),
     );

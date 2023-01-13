@@ -6,6 +6,7 @@ import '../providers/cart.dart';
 import '../providers/orders.dart';
 import '../widgets/ticket.dart';
 import '../assets/custom_icons/custom_icons_icons.dart';
+import '../widgets/payment_dialog.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -28,7 +29,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Provider.of<Cart>(context, listen: false),
           double.parse(cashPaymentController.text),
         );
-        Provider.of<Cart>(context, listen: false).clear();
+        // Provider.of<Cart>(context, listen: false).clear();
       } catch (error) {
         errorDialog.showDialog1(context, error.toString());
       }
@@ -55,11 +56,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       if (!mounted) {
         return;
       }
-      if (result) {
-        Navigator.of(context).pop();
-      }
+      // if (result) {
+      //   Navigator.of(context).pop();
+      // }
     } catch (error) {
-      errorDialog.showDialog1(context, error);
+      errorDialog.showDialog1(context, error.toString());
     }
   }
 
@@ -170,8 +171,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                     backgroundColor:
                                         Theme.of(context).primaryColor,
                                   ),
-                                  onPressed:
-                                      _paymentText.isNotEmpty ? _submit : null,
+                                  onPressed: _paymentText.isNotEmpty
+                                      ? () {
+                                          _submit();
+                                          showDialog(
+                                            context: context,
+                                            builder: (ctx) => PaymentDialog(
+                                                ctx,
+                                                double.parse(
+                                                    cashPaymentController
+                                                        .text)),
+                                          );
+                                        }
+                                      : null,
                                   child: const Text("CHARGE"),
                                 ),
                               ),
