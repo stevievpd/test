@@ -33,7 +33,7 @@ class _ProductsGridState extends State<ProductsGrid> {
             child: Center(
               child: Image.asset(
                 'assets/images/category_logo.png',
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
           )

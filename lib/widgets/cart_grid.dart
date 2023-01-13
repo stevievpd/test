@@ -68,7 +68,7 @@ class CartGrid extends StatelessWidget {
                     child: Center(
                         child: Image.asset(
                       'assets/images/cart_logo.png',
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     )),
                   )
                 : ListView.builder(
