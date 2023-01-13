@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../providers/cart.dart';
 import '../providers/category.dart';
-import '../screens/auth_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/products.dart';
+import '../screens/auth_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   final storage = const FlutterSecureStorage();
@@ -17,9 +17,11 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final navigator = Navigator.of(context);
     return Drawer(
+      backgroundColor: const Color.fromARGB(255, 234, 236, 255),
       child: Column(
         children: <Widget>[
           AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             title: const Text('Hello Friend!'),
             automaticallyImplyLeading: false,
           ),

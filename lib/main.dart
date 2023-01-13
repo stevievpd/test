@@ -3,16 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:reality_pos/screens/products_overview_screen.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
+import './screens/auth_screen.dart';
+import './screens/products_overview_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
 import './providers/category.dart';
 import './providers/auth.dart';
 import './screens/orders_screen.dart';
-import './screens/auth_screen.dart';
 import './widgets/cart_grid.dart';
 
 Future<void> main() async {
@@ -57,13 +57,18 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'MyShop',
         theme: ThemeData(
+          primaryColor: const Color(0xff1f2029),
           textTheme: const TextTheme(
+            titleLarge: TextStyle(fontWeight: FontWeight.bold),
             bodyLarge: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-            labelMedium: TextStyle(fontSize: 20),
+            labelMedium: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+            labelLarge: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+            displayMedium: TextStyle(fontFamily: "Anton"),
+            headlineSmall: TextStyle(fontFamily: "Anton"),
           ),
           fontFamily: 'Lato',
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-              .copyWith(secondary: Colors.deepOrange),
         ),
         home: FutureBuilder(
           future: jwtOrEmpty,
@@ -86,6 +91,8 @@ class MyApp extends StatelessWidget {
           CartGrid.routeName: (ctx) => const CartGrid(),
           OrdersScreen.routeName: (ctx) => const OrdersScreen(),
           AuthScreen.routeName: (ctx) => const AuthScreen(),
+          ProductsOverviewScreen.routeName: (ctx) =>
+              const ProductsOverviewScreen(),
         },
       ),
     );

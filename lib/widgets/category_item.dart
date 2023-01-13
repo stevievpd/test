@@ -31,7 +31,10 @@ class CategoryItem extends StatelessWidget {
                 width: 50,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
-                  child: Image.network(categoryData.icon.toString()),
+                  child: Image.network(
+                    categoryData.icon.toString(),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               const SizedBox(width: 20),

@@ -22,7 +22,7 @@ class Product with ChangeNotifier {
     title = json['title'] as String;
     description = json['description'] as String;
     price = (json['price'] as num).toDouble();
-    category = json['categoryId'] as int;
+    category = json['category_id'] as int;
     icon = json['icon'] as String;
   }
 

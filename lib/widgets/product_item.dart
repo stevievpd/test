@@ -42,7 +42,7 @@ class ProductItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
                               productData.icon.toString(),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             ),
                           )),
                       Text(

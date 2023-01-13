@@ -14,6 +14,7 @@ import '../widgets/confirm_exit_app.dart';
 
 class ProductsOverviewScreen extends StatefulWidget {
   const ProductsOverviewScreen({super.key});
+  static const routeName = '/products-overview';
 
   @override
   State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
